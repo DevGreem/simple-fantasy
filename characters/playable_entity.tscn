@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://bgol0rt5ftggr"]
+
+[ext_resource type="PackedScene" uid="uid://bboed8ypyawwh" path="res://characters/entity.tscn" id="1_p0wgt"]
+[ext_resource type="Script" uid="uid://befgjt3cd4mke" path="res://scripts/characters/playable_entity.gd" id="2_2xk24"]
+[ext_resource type="Script" uid="uid://dc6gkd8nge6d4" path="res://scripts/characters/actions/action_container.gd" id="3_7re54"]
+[ext_resource type="Script" uid="uid://c0wjn6xqy36re" path="res://scripts/characters/actions/attack_action.gd" id="4_2s2ho"]
+[ext_resource type="Script" uid="uid://b7c836lfeytcp" path="res://scripts/characters/actions/block_action.gd" id="5_eq422"]
+[ext_resource type="Script" uid="uid://d06nea7essarp" path="res://scripts/characters/actions/run_action.gd" id="6_eq422"]
+
+[node name="PlayableEntity" unique_id=1322854397 instance=ExtResource("1_p0wgt")]
+script = ExtResource("2_2xk24")
+run_percent = 0.2
+entity_name = ""
+hp = 1
+def = 0
+
+[node name="ActionsContainer" type="Node" parent="." index="0" unique_id=1818343057]
+script = ExtResource("3_7re54")
+metadata/_custom_type_script = "uid://dc6gkd8nge6d4"
+
+[node name="AttackAction" type="Node" parent="ActionsContainer" index="0" unique_id=1928328911]
+script = ExtResource("4_2s2ho")
+action_name = "Attack"
+action_description = "A simple attack"
+metadata/_custom_type_script = "uid://c0wjn6xqy36re"
+
+[node name="BlockAction" type="Node" parent="ActionsContainer" index="1" unique_id=587993732]
+script = ExtResource("5_eq422")
+action_name = "Block"
+action_description = "Block the next attack"
+metadata/_custom_type_script = "uid://6vlx21yd16ms"
+
+[node name="RunAction" type="Node" parent="ActionsContainer" index="2" unique_id=1379023191]
+script = ExtResource("6_eq422")
+action_name = "Run"
+action_description = "Escape from the combat"
+metadata/_custom_type_script = "uid://6vlx21yd16ms"

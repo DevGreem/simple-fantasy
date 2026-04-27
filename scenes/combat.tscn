@@ -1,0 +1,146 @@
+[gd_scene format=3 uid="uid://kk32olphk3vn"]
+
+[ext_resource type="Script" uid="uid://cft8bco8byurl" path="res://scenes/combat.gd" id="1_hmy61"]
+[ext_resource type="Script" uid="uid://bmc2jqgr54oth" path="res://scripts/teams/player_team.gd" id="3_4gnb8"]
+[ext_resource type="Script" uid="uid://b3kbpl7o45x5s" path="res://scripts/state_machine/state_machine.gd" id="3_4l26h"]
+[ext_resource type="PackedScene" uid="uid://br3w6ar1l0rni" path="res://characters/warrior/enemy_warrior.tscn" id="3_8we11"]
+[ext_resource type="Texture2D" uid="uid://bxhiupclrs1t3" path="res://scenes/final_fantasy_grass.png" id="3_aic3r"]
+[ext_resource type="Script" uid="uid://cp7pabwqjmppa" path="res://scripts/teams/states/selecting_state.gd" id="4_p71o4"]
+[ext_resource type="Script" uid="uid://d632vnk7imf6" path="res://scripts/teams/states/selecting_character_state.gd" id="4_vcae8"]
+[ext_resource type="Script" uid="uid://bo4pbuu5cc1go" path="res://scripts/characters/actions/entity_info_container_node.gd" id="5_hmy61"]
+[ext_resource type="Script" uid="uid://c6jcgfdxiku6r" path="res://scripts/characters/actions/actions_container_node.gd" id="6_0qyji"]
+[ext_resource type="Script" uid="uid://bt8tkddpd4473" path="res://scripts/teams/states/idle_state.gd" id="7_0qyji"]
+[ext_resource type="Texture2D" uid="uid://tfaqt5fmde8r" path="res://assets/arrows/right_arrow.jpg" id="7_osi8t"]
+[ext_resource type="PackedScene" uid="uid://cr2qe2281f5vx" path="res://characters/warrior/warrior.tscn" id="7_sa5k0"]
+[ext_resource type="Script" uid="uid://cnr4paxy4u7gt" path="res://scripts/teams/ai_team.gd" id="7_xkyey"]
+[ext_resource type="Script" uid="uid://cuv5b0kvf3qqf" path="res://scripts/ranges/int_range.gd" id="9_xkyey"]
+[ext_resource type="Script" uid="uid://n27he60pn0x1" path="res://assets/arrows/arrow_pointer.gd" id="11_hrcy2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gvie1"]
+bg_color = Color(0, 0, 0, 0.6627451)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hmy61"]
+bg_color = Color(0, 0, 0, 0.6627451)
+
+[sub_resource type="Resource" id="Resource_u07v1"]
+script = ExtResource("9_xkyey")
+min_value = 5
+max_value = 10
+metadata/_custom_type_script = "uid://cuv5b0kvf3qqf"
+
+[sub_resource type="Resource" id="Resource_hkish"]
+script = ExtResource("9_xkyey")
+min_value = 5
+max_value = 10
+metadata/_custom_type_script = "uid://cuv5b0kvf3qqf"
+
+[sub_resource type="Resource" id="Resource_a5n2y"]
+script = ExtResource("9_xkyey")
+min_value = 5
+max_value = 10
+metadata/_custom_type_script = "uid://cuv5b0kvf3qqf"
+
+[node name="Combat" type="Node2D" unique_id=1783004309 node_paths=PackedStringArray("left_team", "right_team")]
+script = ExtResource("1_hmy61")
+left_team = NodePath("EnemiesTeam")
+right_team = NodePath("PlayerTeam")
+
+[node name="UI" type="Control" parent="." unique_id=216462789]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1150.0
+offset_bottom = 647.0
+
+[node name="FinalFantasyGrass" type="TextureRect" parent="UI" unique_id=1889701759]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("3_aic3r")
+
+[node name="Arrow" type="TextureRect" parent="UI" unique_id=1749777467]
+visible = false
+layout_mode = 0
+offset_left = -51.0
+offset_top = -1.0
+offset_right = -11.0
+offset_bottom = 39.0
+texture = ExtResource("7_osi8t")
+expand_mode = 2
+script = ExtResource("11_hrcy2")
+
+[node name="EntityInfoContainer" type="HBoxContainer" parent="UI" unique_id=1198657990]
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -127.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("5_hmy61")
+
+[node name="Actions" type="ItemList" parent="UI/EntityInfoContainer" unique_id=515437691 node_paths=PackedStringArray("arrow")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_gvie1")
+script = ExtResource("6_0qyji")
+arrow = NodePath("../../Arrow")
+
+[node name="ActionDescription" type="Label" parent="UI/EntityInfoContainer" unique_id=322044844]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/normal = SubResource("StyleBoxFlat_hmy61")
+
+[node name="EnemiesTeam" type="Node" parent="." unique_id=1654611235]
+script = ExtResource("7_xkyey")
+
+[node name="EnemyWarrior" parent="EnemiesTeam" unique_id=1322854397 instance=ExtResource("3_8we11")]
+top_level = true
+position = Vector2(205, 332)
+flip_h = true
+dmg = SubResource("Resource_u07v1")
+
+[node name="PlayerTeam" type="Node" parent="." unique_id=1040968493]
+script = ExtResource("3_4gnb8")
+
+[node name="StateMachine" type="Node" parent="PlayerTeam" unique_id=1387175904 node_paths=PackedStringArray("default_state")]
+script = ExtResource("3_4l26h")
+default_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://b3kbpl7o45x5s"
+
+[node name="Idle" type="Node" parent="PlayerTeam/StateMachine" unique_id=1572017087 node_paths=PackedStringArray("arrow_node")]
+script = ExtResource("7_0qyji")
+arrow_node = NodePath("../../../UI/Arrow")
+metadata/_custom_type_script = "uid://cdc0fr4l0t3am"
+
+[node name="SelectingCharacter" type="Node" parent="PlayerTeam/StateMachine" unique_id=616652794 node_paths=PackedStringArray("arrow_node")]
+script = ExtResource("4_vcae8")
+arrow_node = NodePath("../../../UI/Arrow")
+metadata/_custom_type_script = "uid://cdc0fr4l0t3am"
+
+[node name="Selecting" type="Node" parent="PlayerTeam/StateMachine" unique_id=301291439]
+script = ExtResource("4_p71o4")
+metadata/_custom_type_script = "uid://cdc0fr4l0t3am"
+
+[node name="Warrior" parent="PlayerTeam" unique_id=51742141 instance=ExtResource("7_sa5k0")]
+top_level = true
+position = Vector2(868, 231)
+run_percent = 1.0
+dmg = SubResource("Resource_hkish")
+
+[node name="Warrior2" parent="PlayerTeam" unique_id=1001904244 instance=ExtResource("7_sa5k0")]
+top_level = true
+position = Vector2(787, 438)
+run_percent = 1.0
+dmg = SubResource("Resource_a5n2y")
+
+[connection signal="on_select_character" from="PlayerTeam" to="UI/EntityInfoContainer" method="_on_player_team_on_select_character"]
+[connection signal="on_select_character" from="PlayerTeam" to="UI/EntityInfoContainer/Actions" method="_on_player_team_on_select_character"]
+[connection signal="on_unselect_character" from="PlayerTeam" to="UI/EntityInfoContainer" method="_on_player_team_on_unselect_character"]
