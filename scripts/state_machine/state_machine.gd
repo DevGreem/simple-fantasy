@@ -24,7 +24,7 @@ func _state_start() -> void:
 	actual_state.state_machine = self
 	actual_state.start()
 	
-	prints("StateMachine", controlled_node.name, "start state", actual_state.name)
+	#prints("StateMachine", controlled_node.name, "start state", actual_state.name)
 
 func change_state(node: String) -> void:
 	
@@ -35,6 +35,7 @@ func change_state(node: String) -> void:
 	_state_start()
 	
 func _process(delta: float) -> void:
+	
 	
 	if actual_state:
 		actual_state.on_process(delta)

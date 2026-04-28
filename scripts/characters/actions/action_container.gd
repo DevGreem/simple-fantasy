@@ -20,11 +20,11 @@ func get_actions() -> Array[ActionBase]:
 	var actions_arr: Array[ActionBase] = []
 	
 	for action: ActionBase in self.get_children(true):
-		prints("Actual action initializing: ", action.action_name)
+		#prints("Actual action initializing: ", action.action_name)
 		
 		if action is ActionBase:
 			
-			prints("Actual action: ", action)
+			#prints("Actual action: ", action)
 			
 			actions_arr.append(action)
 	

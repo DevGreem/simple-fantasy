@@ -28,13 +28,14 @@ func _on_player_team_on_select_character(character: PlayableEntity) -> void:
 	self.show()
 	self.index = 0
 	self.selected_character = character
-	self.actions_list.update_list(character.get_actions())
+	self.actions_list.update_list(actions)
 	self.action_label.text = actions[0].action_description
 	
 	await get_tree().process_frame
 	_can_input = true
 
 func _on_player_team_on_unselect_character() -> void:
+	_can_input = false
 	self.hide()
 
 func _input(event: InputEvent) -> void:
@@ -49,7 +50,6 @@ func _input(event: InputEvent) -> void:
 		self.index += 1
 	
 	if event.is_action_pressed("select_action"):
-		self.actions[self.index].make_action()
 		_can_input = false
 		self.hide()
 		

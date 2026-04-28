@@ -10,10 +10,14 @@ func _on_set_combat():
 			combat.changed_turn.disconnect(_on_change_turn)
 
 func _on_combat_ready():
+	
 	combat.changed_turn.connect(_on_change_turn)
 	_on_change_turn(combat.actual_turn)
 
 func _on_change_turn(new_turn: int):
+	
+	if combat.ended:
+		return
 	
 	if new_turn % 2 == 1:
 		_select_entity()

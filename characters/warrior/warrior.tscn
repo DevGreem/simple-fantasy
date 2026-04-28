@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cr2qe2281f5vx"]
 
-[ext_resource type="SpriteFrames" uid="uid://djtlx2osu23xr" path="res://characters/warrior/warrior_sprite.tres" id="1_i17c2"]
 [ext_resource type="PackedScene" uid="uid://bgol0rt5ftggr" path="res://characters/playable_entity.tscn" id="1_u0brw"]
+[ext_resource type="SpriteFrames" uid="uid://d0pqrx7a6mkwl" path="res://characters/warrior/sprites.tres" id="2_dl05o"]
 [ext_resource type="Script" uid="uid://cuv5b0kvf3qqf" path="res://scripts/ranges/int_range.gd" id="3_dl05o"]
 
 [sub_resource type="Resource" id="Resource_jn5ik"]
@@ -11,7 +11,11 @@ max_value = 10
 metadata/_custom_type_script = "uid://cuv5b0kvf3qqf"
 
 [node name="Warrior" unique_id=1322854397 instance=ExtResource("1_u0brw")]
-sprite_frames = ExtResource("1_i17c2")
+texture_filter = 1
+scale = Vector2(4, 4)
+sprite_frames = ExtResource("2_dl05o")
+animation = &"idle"
+autoplay = "idle"
 entity_name = "Warrior"
 hp = 10
 dmg = SubResource("Resource_jn5ik")

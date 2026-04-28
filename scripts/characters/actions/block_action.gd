@@ -2,6 +2,6 @@ extends ActionBase
 
 class_name BlockAction
 
-func make_action() -> void:
-	controlled_node.blocking = true
-	super.make_action()
+func _own_action() -> bool:
+	controlled_node.block()
+	return super._own_action()

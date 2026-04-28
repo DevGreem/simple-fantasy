@@ -9,14 +9,20 @@ var assigned_team: PlayerTeam:
 
 func start():
 	
+	if assigned_team.combat.ended:
+		return
+	
 	await get_tree().process_frame
 	
-	prints("Started State ", self.name, " with team: ", self.assigned_team)
+	#prints("Started State ", self.name, " with team: ", self.assigned_team)
 	self.assigned_team.selected_character = 0
 	move_arrow_to()
 
+func end():
+	arrow_node.unpoint()
+
 func on_input(event: InputEvent) -> void:
-	print("Detected character selection action...")
+	#print("Detected character selection action...")
 	
 	if event.is_action_pressed("up"):
 		self.assigned_team.selected_character -= 1
@@ -32,4 +38,4 @@ func on_input(event: InputEvent) -> void:
 
 func move_arrow_to() -> void:
 	var selected_ally = self.assigned_team.get_selected_ally()
-	arrow_node.point_to(selected_ally, Vector2i(0, 0))
+	arrow_node.point_to(selected_ally, ArrowPointer.PointingDirection.DOWN, Vector2(0, 20), Vector2i(1, 0))

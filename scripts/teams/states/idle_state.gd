@@ -17,7 +17,11 @@ func _sync_turn():
 	_on_change_turn(combat_node.actual_turn)
 
 func _on_change_turn(_num_turn: int):
-	prints("Controlled node: ", controlled_node)
-	prints("Actual team turn: ", combat_node.actual_team())
+	#prints("Controlled node: ", controlled_node)
+	#prints("Actual team turn: ", combat_node.actual_team())
+	
+	if combat_node.ended:
+		return
+	
 	if combat_node.actual_turn % 2 == 0:
 		state_machine.change_state("SelectingCharacter")

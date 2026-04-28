@@ -20,10 +20,6 @@ config/icon="res://icon.svg"
 Sprite2DUtils="*uid://brd27eqbnrcrs"
 AIUtils="*uid://3jve0i0egqad"
 
-[debug]
-
-settings/stdout/print_fps=true
-
 [input]
 
 up={

@@ -2,8 +2,8 @@ extends ActionBase
 
 class_name AttackAction
 
-func make_action() -> void:
-	print("Attacking!")
+func _own_action() -> bool:
+	#print("Attacking!")
 	controlled_node.attack()
-	super.make_action()
+	return super._own_action()
 	
