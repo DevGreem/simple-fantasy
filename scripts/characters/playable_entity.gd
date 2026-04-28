@@ -15,6 +15,7 @@ var playable_team: PlayerTeam:
 		return team
 	
 func _ready() -> void:
+	super._ready()
 	_base_position = self.global_position
 	on_be_selected.connect(select)
 	on_be_unselected.connect(unselect)

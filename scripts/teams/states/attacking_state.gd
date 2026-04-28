@@ -20,6 +20,10 @@ func process_selected():
 	
 	var available := assigned_team.enemies_team.get_alive_allies()
 	
+	if available.is_empty():
+		state_machine.change_state("Idle")
+		return
+	
 	var hovering_character := available[_selected_index]
 	
 	arrow_node.point_to(
@@ -30,8 +34,16 @@ func process_selected():
 	)
 
 func on_input(event: InputEvent) -> void:
+	
+	if assigned_team.combat.ended:
+		return
+	
 	#print("Detected character selection action...")
 	var available := assigned_team.enemies_team.get_alive_allies()
+	
+	if available.is_empty():
+		state_machine.change_state("Idle")
+		return
 	
 	if event.is_action_pressed("up"):
 		self._selected_index -= 1
@@ -48,7 +60,9 @@ func on_input(event: InputEvent) -> void:
 		assigned_team.selected_character.attack(
 			assigned_team.selected_enemy
 		)
+		
 		await assigned_team.selected_character.animation_finished
+		
 		assigned_team.selected_character.unselect()
 		state_machine.change_state("Idle")
 		assigned_team.combat.next_turn()

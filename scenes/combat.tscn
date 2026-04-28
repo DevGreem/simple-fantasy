@@ -87,15 +87,19 @@ script = ExtResource("7_xkyey")
 
 [node name="EnemyWarrior" parent="EnemiesTeam" unique_id=1322854397 instance=ExtResource("3_8we11")]
 position = Vector2(286, 171)
+hp = 1
 
 [node name="EnemyWarrior2" parent="EnemiesTeam" unique_id=317037135 instance=ExtResource("3_8we11")]
 position = Vector2(281, 284)
+hp = 1
 
 [node name="EnemyWarrior3" parent="EnemiesTeam" unique_id=1773410275 instance=ExtResource("3_8we11")]
 position = Vector2(282, 410)
+hp = 1
 
 [node name="EnemyWarrior4" parent="EnemiesTeam" unique_id=996576732 instance=ExtResource("3_8we11")]
 position = Vector2(286, 532)
+hp = 1
 
 [node name="PlayerTeam" type="Node" parent="." unique_id=1040968493]
 script = ExtResource("3_4gnb8")

@@ -56,11 +56,12 @@ func on_input(event: InputEvent) -> void:
 		action.request_state_change.disconnect(_on_request_state)
 		
 		if not self._requested_state_change:
-			assigned_team.select_character()
 			_is_acting = true
 			
 			if ally.animation != "blocking":
 				await ally.animation_finished
+				
+			assigned_team.select_character()
 			
 			state_machine.change_state("Idle")
 			self.assigned_team.combat.next_turn()

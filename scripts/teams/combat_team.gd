@@ -49,6 +49,14 @@ func get_alive_allies() -> Array[CombatEntity]:
 	
 	return alive
 
+func get_died_allies() -> Array[CombatEntity]:
+	
+	var died := self.allies.filter(
+		func(entity: CombatEntity): return not entity.is_alive()
+	)
+	
+	return died
+
 func get_available_allies(ant_ans := 0) -> Array[CombatEntity]:
 	
 	var _allies := self.get_alive_allies()
