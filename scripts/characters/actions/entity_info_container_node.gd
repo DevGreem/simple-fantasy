@@ -2,20 +2,19 @@ extends HBoxContainer
 
 class_name EntityInfoContainerNode
 
-var selected_character: PlayableEntity
+var _can_input := false
+@export var player_team: PlayerTeam
 var actions: Array[ActionBase]:
 	get:
-		return selected_character.get_actions()
-var _can_input := false
+		return player_team.selected_character.get_actions()
 
 var index := 0:
 	set(value):
 		
-		if not selected_character:
+		if not player_team.selected_character:
 			return
 		
-		if value < 0 or value >= actions.size():
-			return
+		value = wrapi(value, 0, actions.size())
 		
 		index = value
 		actions_list.select(value)
@@ -24,12 +23,18 @@ var index := 0:
 @onready var actions_list: ActionsContainerNode = get_node("Actions")
 @onready var action_label: Label = get_node("ActionDescription")
 
-func _on_player_team_on_select_character(character: PlayableEntity) -> void:
+func _ready() -> void:
+	if not player_team.on_select_character.is_connected(_on_player_team_on_select_character):
+		player_team.on_select_character.connect(_on_player_team_on_select_character)
+	
+	if not player_team.on_unselect_character.is_connected(_on_player_team_on_unselect_character):
+		player_team.on_unselect_character.connect(_on_player_team_on_unselect_character)
+
+func _on_player_team_on_select_character() -> void:
 	self.show()
-	self.index = 0
-	self.selected_character = character
 	self.actions_list.update_list(actions)
 	self.action_label.text = actions[0].action_description
+	self.index = 0
 	
 	await get_tree().process_frame
 	_can_input = true
@@ -40,13 +45,13 @@ func _on_player_team_on_unselect_character() -> void:
 
 func _input(event: InputEvent) -> void:
 	
-	if not selected_character or not _can_input:
+	if not player_team.selected_character or not _can_input:
 		return
 	
 	if event.is_action_pressed("up"):
 		self.index -= 1
 	
-	if event.is_action_pressed("down"):
+	elif event.is_action_pressed("down"):
 		self.index += 1
 	
 	if event.is_action_pressed("select_action"):

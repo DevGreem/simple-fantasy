@@ -2,7 +2,9 @@ extends Node
 
 class_name StateMachine
 
-@onready var controlled_node = self.get_parent()
+var controlled_node: Node:
+	get:
+		return self.get_parent()
 
 @export var default_state: StateBase
 var actual_state: StateBase = null
@@ -35,7 +37,6 @@ func change_state(node: String) -> void:
 	_state_start()
 	
 func _process(delta: float) -> void:
-	
 	
 	if actual_state:
 		actual_state.on_process(delta)

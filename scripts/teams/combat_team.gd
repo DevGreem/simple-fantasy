@@ -53,6 +53,9 @@ func get_available_allies(ant_ans := 0) -> Array[CombatEntity]:
 	
 	var _allies := self.get_alive_allies()
 	
+	if _allies.size() == 0:
+		return []
+	
 	var available := _allies.filter(
 		func(entity: CombatEntity): return not entity.was_played
 	)

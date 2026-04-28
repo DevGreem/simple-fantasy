@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cr2qe2281f5vx" path="res://characters/warrior/warrior.tscn" id="7_sa5k0"]
 [ext_resource type="Script" uid="uid://cnr4paxy4u7gt" path="res://scripts/teams/ai_team.gd" id="7_xkyey"]
 [ext_resource type="Script" uid="uid://n27he60pn0x1" path="res://assets/arrows/arrow_pointer.gd" id="11_hrcy2"]
+[ext_resource type="Script" uid="uid://orquvx13qs7a" path="res://scripts/teams/states/attacking_state.gd" id="14_u07v1"]
 [ext_resource type="AudioStream" uid="uid://ckfolg8sgky6p" path="res://audio/victory.mp3" id="17_hkish"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gvie1"]
@@ -55,7 +56,7 @@ texture = ExtResource("7_osi8t")
 expand_mode = 2
 script = ExtResource("11_hrcy2")
 
-[node name="EntityInfoContainer" type="HBoxContainer" parent="UI" unique_id=1198657990]
+[node name="EntityInfoContainer" type="HBoxContainer" parent="UI" unique_id=1198657990 node_paths=PackedStringArray("player_team")]
 visible = false
 layout_mode = 1
 anchors_preset = 12
@@ -66,6 +67,7 @@ offset_top = -127.0
 grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("5_hmy61")
+player_team = NodePath("../../PlayerTeam")
 
 [node name="Actions" type="ItemList" parent="UI/EntityInfoContainer" unique_id=515437691 node_paths=PackedStringArray("arrow")]
 layout_mode = 2
@@ -116,6 +118,11 @@ metadata/_custom_type_script = "uid://cdc0fr4l0t3am"
 [node name="Selecting" type="Node" parent="PlayerTeam/StateMachine" unique_id=301291439]
 script = ExtResource("4_p71o4")
 metadata/_custom_type_script = "uid://cdc0fr4l0t3am"
+
+[node name="Attacking" type="Node" parent="PlayerTeam/StateMachine" unique_id=1039376404 node_paths=PackedStringArray("arrow_node")]
+script = ExtResource("14_u07v1")
+arrow_node = NodePath("../../../UI/Arrow")
+metadata/_custom_type_script = "uid://orquvx13qs7a"
 
 [node name="Warrior" parent="PlayerTeam" unique_id=1825986453 instance=ExtResource("7_sa5k0")]
 position = Vector2(866, 157)

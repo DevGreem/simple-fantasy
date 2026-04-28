@@ -39,4 +39,4 @@ func attack_player() -> void:
 	#print(enemies)
 	
 	if target[0] == AIUtils.AITarget.RANDOM:
-		attack(randi_range(0, enemies.size()-1))
+		attack(enemies[randi_range(0, enemies.size()-1)])

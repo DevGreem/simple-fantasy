@@ -42,7 +42,7 @@ func rotate_left_team() -> void:
 func next_turn() -> void:
 	var status := _verify_win()
 	
-	if status:
+	if status and not ended:
 		print("Passed turn")
 		_turn += 1
 

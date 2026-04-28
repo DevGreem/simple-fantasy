@@ -48,6 +48,6 @@ func _debug_act_animation():
 	if animation == "attacking":
 		print("ATTACK CALLED AGAIN")
 
-func attack(__: int = 0):
+func attack(__):
 	#prints("Attacking to enemy: ", self.playable_team.selected_enemy)
 	super.attack(self.playable_team.selected_enemy)

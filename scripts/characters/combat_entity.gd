@@ -46,8 +46,8 @@ func get_actions() -> Array[ActionBase]:
 	
 	return actions_container.actions
 
-func attack(enemy_index: int) -> void:
-	self.team.enemies_team.get_alive_ally(enemy_index).get_damage(self)
+func attack(enemy: CombatEntity) -> void:
+	enemy.get_damage(self)
 	_attack_animation()
 	self.play("attacking")
 	#prints("Attacking enemy on index ", enemy_index)

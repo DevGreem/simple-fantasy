@@ -9,8 +9,7 @@ var assigned_team: PlayerTeam:
 var _selected_action_index := 0:
 	set(value):
 		prints("New selected index: ", _selected_action_index)
-		if value < 0 or value >= self.assigned_team.get_selected_ally().get_actions().size():
-			return
+		value = wrapi(value, 0, assigned_team.selected_character.get_actions().size())
 		
 		_selected_action_index = value
 		#prints("New action index: ", _selected_action_index)
@@ -19,6 +18,7 @@ var _requested_state_change := false
 var _is_acting := false
 
 func start():
+	self._selected_action_index = 0
 	self._requested_state_change = false
 	_is_acting = false
 
@@ -35,17 +35,17 @@ func on_input(event: InputEvent) -> void:
 	if event.is_action_pressed("up"):
 		self._selected_action_index -= 1
 		return
-	
-	if event.is_action_pressed("down"):
+		
+	elif event.is_action_pressed("down"):
 		self._selected_action_index += 1
 		return
-	
-	if event.is_action_pressed("unselect_action"):
-		self.assigned_team.is_character_selected = false
+		
+	elif event.is_action_pressed("unselect_action"):
+		assigned_team.select_character()
 		state_machine.change_state("SelectingCharacter")
-	
-	if event.is_action_pressed("select_action"):
-		var ally := self.assigned_team.get_selected_ally()
+		
+	elif event.is_action_pressed("select_action"):
+		var ally := self.assigned_team.selected_character
 		var action: ActionBase = ally.get_actions()[_selected_action_index]
 		
 		if not action.request_state_change.is_connected(_on_request_state):
@@ -55,10 +55,8 @@ func on_input(event: InputEvent) -> void:
 		
 		action.request_state_change.disconnect(_on_request_state)
 		
-		self.assigned_team.is_character_selected = false
-		ally.unselect()
-		
 		if not self._requested_state_change:
+			assigned_team.select_character()
 			_is_acting = true
 			
 			if ally.animation != "blocking":
