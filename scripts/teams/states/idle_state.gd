@@ -25,5 +25,5 @@ func _on_change_turn(num_turn: int):
 	if assigned_team.combat.ended:
 		return
 	
-	if num_turn % 2 == 0:
+	if num_turn % 2 == assigned_team.play_turns:
 		state_machine.change_state("SelectingCharacter")

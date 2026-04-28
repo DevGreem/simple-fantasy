@@ -16,10 +16,13 @@ func _on_combat_ready():
 
 func _on_change_turn(new_turn: int):
 	
+	if not combat:
+		return
+	
 	if combat.ended:
 		return
 	
-	if new_turn % 2 == 1:
+	if new_turn % 2 == play_turns:
 		_select_entity()
 
 func _select_entity():

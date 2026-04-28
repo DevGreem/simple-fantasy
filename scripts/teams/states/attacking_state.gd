@@ -8,12 +8,14 @@ var assigned_team: PlayerTeam:
 
 var _selected_index: int = 0
 @export var arrow_node: ArrowPointer
+var _is_acting := false
 
 func start():
 	_selected_index = 0;
 	assigned_team.selected_enemy = null
 
 func end():
+	_is_acting = false
 	arrow_node.unpoint()
 
 func process_selected():
@@ -35,7 +37,7 @@ func process_selected():
 
 func on_input(event: InputEvent) -> void:
 	
-	if assigned_team.combat.ended:
+	if assigned_team.combat.ended or _is_acting:
 		return
 	
 	#print("Detected character selection action...")
@@ -56,6 +58,7 @@ func on_input(event: InputEvent) -> void:
 	process_selected()
 	
 	if event.is_action_pressed("select_action"):
+		_is_acting = true
 		assigned_team.selected_enemy = available[_selected_index]
 		assigned_team.selected_character.attack(
 			assigned_team.selected_enemy
@@ -63,6 +66,6 @@ func on_input(event: InputEvent) -> void:
 		
 		await assigned_team.selected_character.animation_finished
 		
-		assigned_team.selected_character.unselect()
 		state_machine.change_state("Idle")
+		assigned_team.selected_character.unselect()
 		assigned_team.combat.next_turn()

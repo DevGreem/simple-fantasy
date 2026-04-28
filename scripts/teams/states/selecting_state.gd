@@ -52,13 +52,17 @@ func on_input(event: InputEvent) -> void:
 			action.request_state_change.connect(_on_request_state)
 		
 		action.make_action()
+		prints("Maded action: ", action.action_name)
 		
 		action.request_state_change.disconnect(_on_request_state)
 		
 		if not self._requested_state_change:
+			prints("Action not requests state change")
 			_is_acting = true
 			
-			if ally.animation != "blocking":
+			if ally.blocking:
+				await get_tree().create_timer(0.3).timeout
+			else:
 				await ally.animation_finished
 				
 			assigned_team.select_character()

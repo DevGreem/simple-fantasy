@@ -29,8 +29,13 @@ func _ready():
 	set_process_input(false)
 	self._connect_changed_turns(left_team.allies)
 	self._connect_changed_turns(right_team.allies)
+	
+	left_team.play_turns = 1
+	right_team.play_turns = 0
+	
 	left_team.combat = self
 	right_team.combat = self
+	
 	audio_manager.finished.connect(_exit_battle)
 	rotate_left_team()
 
@@ -107,10 +112,11 @@ func get_other_team(team: CombatTeam) -> CombatTeam:
 	return null
 
 func actual_team() -> CombatTeam:
-	if actual_turn % 2 == 0:
-		return right_team
 	
-	return left_team
+	if actual_turn % 2 == left_team.play_turns:
+		return left_team
+	
+	return right_team
 
 func _connect_changed_turns(entities: Array[CombatEntity]):
 	

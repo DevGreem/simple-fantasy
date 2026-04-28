@@ -30,6 +30,7 @@ func use_turn() -> void:
 	
 	if type == EntityAIType.RANDOM:
 		attack_player()
+		await self.animation_finished
 	
 	was_played = true
 	self.team.combat.next_turn()

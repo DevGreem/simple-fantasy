@@ -2,7 +2,8 @@ extends AnimatedSprite2D
 
 class_name CombatEntity
 
-signal on_play()
+signal on_play
+signal on_reset_play
 
 var team: CombatTeam
 @export var entity_name: String
@@ -12,6 +13,8 @@ var was_played: bool = false:
 		was_played = value
 		if value:
 			on_play.emit()
+		else:
+			on_reset_play.emit()
 
 
 @export_category("Stats")

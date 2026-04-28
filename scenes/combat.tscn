@@ -5,12 +5,12 @@
 [ext_resource type="Script" uid="uid://b3kbpl7o45x5s" path="res://scripts/state_machine/state_machine.gd" id="3_4l26h"]
 [ext_resource type="PackedScene" uid="uid://br3w6ar1l0rni" path="res://characters/warrior/enemy_warrior.tscn" id="3_8we11"]
 [ext_resource type="Texture2D" uid="uid://bxhiupclrs1t3" path="res://scenes/final_fantasy_grass.png" id="3_aic3r"]
+[ext_resource type="Texture2D" uid="uid://b0audodechayi" path="res://assets/arrows/simple_arrow.png" id="3_u07v1"]
 [ext_resource type="Script" uid="uid://cp7pabwqjmppa" path="res://scripts/teams/states/selecting_state.gd" id="4_p71o4"]
 [ext_resource type="Script" uid="uid://d632vnk7imf6" path="res://scripts/teams/states/selecting_character_state.gd" id="4_vcae8"]
 [ext_resource type="Script" uid="uid://bo4pbuu5cc1go" path="res://scripts/characters/actions/entity_info_container_node.gd" id="5_hmy61"]
 [ext_resource type="Script" uid="uid://c6jcgfdxiku6r" path="res://scripts/characters/actions/actions_container_node.gd" id="6_0qyji"]
 [ext_resource type="Script" uid="uid://bt8tkddpd4473" path="res://scripts/teams/states/idle_state.gd" id="7_0qyji"]
-[ext_resource type="Texture2D" uid="uid://tfaqt5fmde8r" path="res://assets/arrows/right_arrow.jpg" id="7_osi8t"]
 [ext_resource type="PackedScene" uid="uid://cr2qe2281f5vx" path="res://characters/warrior/warrior.tscn" id="7_sa5k0"]
 [ext_resource type="Script" uid="uid://cnr4paxy4u7gt" path="res://scripts/teams/ai_team.gd" id="7_xkyey"]
 [ext_resource type="Script" uid="uid://n27he60pn0x1" path="res://assets/arrows/arrow_pointer.gd" id="11_hrcy2"]
@@ -46,14 +46,13 @@ size_flags_vertical = 4
 texture = ExtResource("3_aic3r")
 
 [node name="Arrow" type="TextureRect" parent="UI" unique_id=1749777467]
-visible = false
+texture_filter = 2
 layout_mode = 0
 offset_left = -51.0
 offset_top = -1.0
 offset_right = -11.0
 offset_bottom = 39.0
-texture = ExtResource("7_osi8t")
-expand_mode = 2
+texture = ExtResource("3_u07v1")
 script = ExtResource("11_hrcy2")
 
 [node name="EntityInfoContainer" type="HBoxContainer" parent="UI" unique_id=1198657990 node_paths=PackedStringArray("player_team")]
@@ -130,6 +129,9 @@ metadata/_custom_type_script = "uid://orquvx13qs7a"
 
 [node name="Warrior" parent="PlayerTeam" unique_id=1825986453 instance=ExtResource("7_sa5k0")]
 position = Vector2(866, 157)
+animation = &"walking"
+frame = 3
+frame_progress = 0.13556291
 
 [node name="Warrior2" parent="PlayerTeam" unique_id=614181422 instance=ExtResource("7_sa5k0")]
 position = Vector2(872, 276)

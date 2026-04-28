@@ -7,6 +7,7 @@ class_name CombatTeam
 		return self.combat.get_other_team(self)
 
 @onready var allies := get_allies()
+var play_turns: int
 
 var combat: CombatScene:
 	set(value):
