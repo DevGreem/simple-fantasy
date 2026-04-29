@@ -28,6 +28,8 @@ bg_color = Color(0, 0, 0, 0.6627451)
 bg_color = Color(0, 0, 0, 0.5176471)
 
 [node name="TestCombat" type="Node2D" unique_id=1783004309]
+metadata/_edit_vertical_guides_ = [855.0]
+metadata/_edit_horizontal_guides_ = [199.0]
 
 [node name="World" type="Node2D" parent="." unique_id=1893681277 node_paths=PackedStringArray("left_team", "right_team", "audio_manager")]
 script = ExtResource("1_5yxj6")
