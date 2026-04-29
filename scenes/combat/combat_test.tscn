@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://kk32olphk3vn"]
 
-[ext_resource type="Script" uid="uid://cft8bco8byurl" path="res://scenes/combat.gd" id="1_5yxj6"]
+[ext_resource type="Script" uid="uid://cft8bco8byurl" path="res://scenes/combat/combat.gd" id="1_5yxj6"]
 [ext_resource type="Script" uid="uid://cnr4paxy4u7gt" path="res://scripts/teams/ai_team.gd" id="2_e5m62"]
 [ext_resource type="PackedScene" uid="uid://br3w6ar1l0rni" path="res://characters/warrior/enemy_warrior.tscn" id="3_22xx6"]
 [ext_resource type="Script" uid="uid://bmc2jqgr54oth" path="res://scripts/teams/player_team.gd" id="4_12wo5"]
@@ -15,7 +15,7 @@
 [ext_resource type="Script" uid="uid://bo4pbuu5cc1go" path="res://scripts/characters/actions/entity_info_container_node.gd" id="13_1ywjy"]
 [ext_resource type="Script" uid="uid://c6jcgfdxiku6r" path="res://scripts/characters/actions/actions_container_node.gd" id="14_kwmn2"]
 [ext_resource type="AudioStream" uid="uid://cm1xo5kygvvs5" path="res://audio/battle.mp3" id="15_tf4cl"]
-[ext_resource type="Script" uid="uid://c27k5d341tcis" path="res://scenes/entity_stats.gd" id="16_22xx6"]
+[ext_resource type="Script" uid="uid://c27k5d341tcis" path="res://scripts/characters/entity_stats.gd" id="16_22xx6"]
 [ext_resource type="Texture2D" uid="uid://chgglggmv7e15" path="res://assets/backgrounds/forest/forest.png" id="17_e5m62"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gvie1"]

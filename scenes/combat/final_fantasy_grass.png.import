@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bxhiupclrs1t3"
-path="res://.godot/imported/final_fantasy_grass.png-6a801a9aec38fb32171e3e5332ea22b2.ctex"
+path="res://.godot/imported/final_fantasy_grass.png-b99d2896650e9a3d9eb9b5fa11f92442.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/final_fantasy_grass.png"
-dest_files=["res://.godot/imported/final_fantasy_grass.png-6a801a9aec38fb32171e3e5332ea22b2.ctex"]
+source_file="res://scenes/combat/final_fantasy_grass.png"
+dest_files=["res://.godot/imported/final_fantasy_grass.png-b99d2896650e9a3d9eb9b5fa11f92442.ctex"]
 
 [params]
 

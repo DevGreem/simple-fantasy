@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://li0fj80ki5o0"]
 
-[ext_resource type="Script" uid="uid://cft8bco8byurl" path="res://scenes/combat.gd" id="1_hmy61"]
+[ext_resource type="Script" uid="uid://cft8bco8byurl" path="res://scenes/combat/combat.gd" id="1_hmy61"]
 [ext_resource type="Script" uid="uid://bmc2jqgr54oth" path="res://scripts/teams/player_team.gd" id="3_4gnb8"]
 [ext_resource type="Script" uid="uid://b3kbpl7o45x5s" path="res://scripts/state_machine/state_machine.gd" id="3_4l26h"]
-[ext_resource type="Texture2D" uid="uid://bxhiupclrs1t3" path="res://scenes/final_fantasy_grass.png" id="3_aic3r"]
+[ext_resource type="Texture2D" uid="uid://bxhiupclrs1t3" path="res://scenes/combat/final_fantasy_grass.png" id="3_aic3r"]
 [ext_resource type="Texture2D" uid="uid://b0audodechayi" path="res://assets/arrows/simple_arrow.png" id="3_u07v1"]
 [ext_resource type="Script" uid="uid://cp7pabwqjmppa" path="res://scripts/teams/states/selecting_state.gd" id="4_p71o4"]
 [ext_resource type="Script" uid="uid://d632vnk7imf6" path="res://scripts/teams/states/selecting_character_state.gd" id="4_vcae8"]
