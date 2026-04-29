@@ -32,7 +32,7 @@ func _init_actions() -> void:
 
 func _on_make_action(action: ActionBase) -> void:
 	
-	prints("Detected action: ", action.action_name)
+	#prints("Detected action: ", action.action_name)
 	if action.action_name == "Block":
 		_was_blocking = true
 	else:

@@ -14,27 +14,28 @@ func _ready():
 
 func _state_default_start() -> void:
 	
-	if not default_state:
+	if not default_state or actual_state != null:
 		return
 	
 	actual_state = default_state
 	_state_start()
 
-func _state_start() -> void:
+func _state_start(...args) -> void:
 	
 	actual_state.controlled_node = controlled_node
 	actual_state.state_machine = self
-	actual_state.start()
+	actual_state.start(args)
 	
 	#prints("StateMachine", controlled_node.name, "start state", actual_state.name)
 
-func change_state(node: String) -> void:
+func change_state(node: String, ...args) -> void:
 	
-	actual_state.end()
+	if actual_state and actual_state.has_method("end"):
+		actual_state.end()
 	
 	actual_state = get_node(node)
 	
-	_state_start()
+	_state_start(args)
 	
 func _process(delta: float) -> void:
 	

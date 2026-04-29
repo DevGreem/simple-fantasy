@@ -5,10 +5,11 @@ class_name SelectingState
 var assigned_team: PlayerTeam:
 	get:
 		return controlled_node
+@export var info_container: EntityInfoContainerNode
 
 var _selected_action_index := 0:
 	set(value):
-		prints("New selected index: ", _selected_action_index)
+		#prints("New selected index: ", _selected_action_index)
 		value = wrapi(value, 0, assigned_team.selected_character.get_actions().size())
 		
 		_selected_action_index = value
@@ -17,15 +18,16 @@ var _selected_action_index := 0:
 var _requested_state_change := false
 var _is_acting := false
 
-func start():
+func start(..._args):
 	self._selected_action_index = 0
 	self._requested_state_change = false
 	_is_acting = false
+	info_container.show()
 
 func end():
 	self._selected_action_index = 0
-	self._requested_state_change = false
 	_is_acting = false
+	info_container.hide()
 
 func on_input(event: InputEvent) -> void:
 	
@@ -42,6 +44,7 @@ func on_input(event: InputEvent) -> void:
 		
 	elif event.is_action_pressed("unselect_action"):
 		assigned_team.select_character()
+		assigned_team.selected_character.was_played = false
 		state_machine.change_state("SelectingCharacter")
 		
 	elif event.is_action_pressed("select_action"):
@@ -52,23 +55,25 @@ func on_input(event: InputEvent) -> void:
 			action.request_state_change.connect(_on_request_state)
 		
 		action.make_action()
-		prints("Maded action: ", action.action_name)
+		#prints("Maded action: ", action.action_name)
 		
 		action.request_state_change.disconnect(_on_request_state)
 		
 		if not self._requested_state_change:
-			prints("Action not requests state change")
+			#prints("Action not requests state change")
 			_is_acting = true
 			
-			if ally.blocking:
+			var is_looping = ally.sprite_frames.get_animation_loop(ally.animation)
+			
+			if ally.blocking or is_looping:
 				await get_tree().create_timer(0.3).timeout
 			else:
 				await ally.animation_finished
-				
+			
 			assigned_team.select_character()
 			
 			state_machine.change_state("Idle")
-			self.assigned_team.combat.next_turn()
+			self.assigned_team.combat.end_turn()
 		
 func _on_request_state(state_name: String) -> void:
 	self._requested_state_change = true

@@ -6,8 +6,7 @@ class_name CombatTeam
 	get:
 		return self.combat.get_other_team(self)
 
-@onready var allies := get_allies()
-var play_turns: int
+@onready var allies := self.get_allies()
 
 var combat: CombatScene:
 	set(value):
@@ -24,10 +23,16 @@ func _on_combat_ready():
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
+	child_entered_tree.connect(_on_child_added)
+	
 	for children in self.allies:
 		children.team = self
-	
 	#prints("Started team: ", self.name)
+
+func _on_child_added(node: Node):
+	
+	if node is CombatEntity:
+		node.team = self
 
 func get_allies() -> Array[CombatEntity]:
 	#print("Reading allies...")
@@ -58,7 +63,7 @@ func get_died_allies() -> Array[CombatEntity]:
 	
 	return died
 
-func get_available_allies(ant_ans := 0) -> Array[CombatEntity]:
+func get_available_allies() -> Array[CombatEntity]:
 	
 	var _allies := self.get_alive_allies()
 	
@@ -68,10 +73,6 @@ func get_available_allies(ant_ans := 0) -> Array[CombatEntity]:
 	var available := _allies.filter(
 		func(entity: CombatEntity): return not entity.was_played
 	)
-	
-	if available.is_empty():
-		_reset_played_characters()
-		return get_available_allies(ant_ans)
 	
 	return available
 
@@ -85,3 +86,6 @@ func _reset_played_characters() -> void:
 	
 	for character in self.allies:
 		character.was_played = false
+
+func start_turn() -> void:
+	pass

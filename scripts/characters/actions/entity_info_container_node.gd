@@ -56,5 +56,4 @@ func _input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("select_action"):
 		_can_input = false
-		self.hide()
 		

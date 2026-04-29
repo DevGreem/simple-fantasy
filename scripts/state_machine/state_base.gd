@@ -5,7 +5,7 @@ class_name StateBase
 var state_machine: StateMachine
 var controlled_node: Node
 
-func start() -> void:
+func start(..._args: Array) -> void:
 	pass
 
 func end() -> void:

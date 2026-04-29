@@ -14,7 +14,7 @@ var controlled_node: PlayableEntity = null
 func make_action() -> bool:
 	on_before_make_action.emit(self)
 	var ok := _own_action()
-	prints("Action maded: ", action_name)
+	#prints("Action maded: ", action_name)
 	on_after_make_action.emit(self)
 	controlled_node.on_play.emit()
 	return ok

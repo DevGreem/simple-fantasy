@@ -1,55 +1,112 @@
-@tool
 extends Node2D
 
 class_name CombatScene
 
-signal changed_turn(new_turn: int)
+enum CombatPhase {
+	STARTING,
+	PLAYER_TURN,
+	ENEMY_TURN,
+	FINAL
+}
 
-@export var left_team: CombatTeam
-@export var right_team: CombatTeam
-@onready var audio_manager: AudioStreamPlayer2D = $Audio
+signal changed_round(new_round: int)
+
+@export var left_team: CombatTeam:
+	set(value):
+		
+		left_team = value
+		left_team.combat = self
+		_rotate_left_team()
+		
+@export var right_team: CombatTeam:
+	set(value):
+		
+		right_team = value
+		right_team.combat = self
+
+var phase := CombatPhase.STARTING
+
+@export var audio_manager: AudioStreamPlayer2D
 var ended := false
 var _winner_team: CombatTeam
 
-var _turn := 0:
+var current_round := 1:
 	set(value):
 		
 		if value < 0:
 			return
 		
-		_turn = value
-		changed_turn.emit(value)
+		current_round = value
+		changed_round.emit(round)
 
-var actual_turn: int:
-	get:
-		return _turn
 
 func _ready():
-	
 	set_process_input(false)
-	self._connect_changed_turns(left_team.allies)
-	self._connect_changed_turns(right_team.allies)
-	
-	left_team.play_turns = 1
-	right_team.play_turns = 0
-	
-	left_team.combat = self
-	right_team.combat = self
-	
+	self.left_team.combat = self
+	self.right_team.combat = self
+	audio_manager.play()
 	audio_manager.finished.connect(_exit_battle)
-	rotate_left_team()
+	_rotate_left_team()
+	
+	await get_tree().process_frame
+	
+	phase = CombatPhase.PLAYER_TURN
+	_start_player_turn()
 
-func rotate_left_team() -> void:
+func _rotate_left_team() -> void:
 	
 	for character in left_team.allies:
 		character.flip_h = true
 
-func next_turn() -> void:
-	var status := _verify_win()
+func get_player_team() -> PlayerTeam:
 	
-	if status and not ended:
-		print("Passed turn")
-		_turn += 1
+	if left_team is PlayerTeam:
+		return left_team
+	
+	return right_team
+
+func get_ai_team() -> AITeam:
+	
+	if left_team is AITeam:
+		return left_team
+	
+	return right_team
+
+func _start_player_turn():
+	_start_turn(get_player_team())
+
+func _start_turn(team: CombatTeam):
+	
+	prints("Started team turn: ", team)
+	if not _verify_win():
+		return
+	
+	team.start_turn()
+
+func end_turn():
+	
+	if ended:
+		return
+	
+	if not _verify_win():
+		return
+	
+	print("Ended turn")
+	if phase == CombatPhase.PLAYER_TURN:
+		_start_turn(get_ai_team())
+		phase = CombatPhase.ENEMY_TURN
+	
+	elif phase == CombatPhase.ENEMY_TURN:
+		_start_turn(get_player_team())
+		phase = CombatPhase.PLAYER_TURN
+		current_round += 1
+
+#func next_turn() -> void:
+	#var status := _verify_win()
+	#
+	#if status and not ended:
+		#round += 1
+		#prints("New turn: ", round)
 
 func _end() -> void:
 	
@@ -59,6 +116,8 @@ func _end() -> void:
 	ended = true
 	
 	if _winner_team is PlayerTeam:
+		var victory := load("res://audio/victory.mp3")
+		audio_manager.stream = victory
 		audio_manager.play()
 		for character in _winner_team.allies:
 			character.play("victory")
@@ -66,6 +125,8 @@ func _end() -> void:
 		var defeat := load("res://audio/defeat.mp3")
 		audio_manager.stream = defeat
 		audio_manager.play()
+	
+	phase = CombatPhase.FINAL
 		
 	set_process_input(true)
 
@@ -78,10 +139,13 @@ func _input(event: InputEvent):
 		_exit_battle()
 
 func manual_end(team: CombatTeam) -> void:
-	print("Invoked manual end")
+	#print("Invoked manual end")
 	
 	_winner_team = get_other_team(team)
 	self._end()
+
+func escape() -> void:
+	_exit_battle()
 
 ## Return [true] if the combat continues
 func _verify_win() -> bool:
@@ -110,15 +174,3 @@ func get_other_team(team: CombatTeam) -> CombatTeam:
 	
 	#print("Is equal to nothing")
 	return null
-
-func actual_team() -> CombatTeam:
-	
-	if actual_turn % 2 == left_team.play_turns:
-		return left_team
-	
-	return right_team
-
-func _connect_changed_turns(entities: Array[CombatEntity]):
-	
-	for entity in entities:
-		self.changed_turn.connect(entity._on_change_turn)

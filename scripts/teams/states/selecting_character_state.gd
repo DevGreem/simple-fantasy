@@ -9,8 +9,9 @@ var assigned_team: PlayerTeam:
 var _selected_index: int = 0
 
 @export var arrow_node: ArrowPointer
+@export var show_stats_node: EntityStatsNode
 
-func start():
+func start(..._args):
 	
 	if assigned_team.combat.ended:
 		set_process_input(false)
@@ -19,48 +20,71 @@ func start():
 		set_process_input(true)
 	
 	await get_tree().process_frame
-	self._selected_index = 0
+	self._selected_index = wrapi(_selected_index, 0, get_total_availables())
 	assigned_team.select_character()
+	show_stats_node.show()
+	arrow_node.select_object(
+		get_hovered(),
+		ArrowPointer.PointingDirection.RIGHT,
+		ArrowPointer.Sides.LEFT,
+		Vector2(-25, 0)
+	)
+	arrow_node.show()
 	
 	process_selected()
 	#prints("Started State ", self.name, " with team: ", self.assigned_team)
 
 func end():
-	arrow_node.unpoint()
+	arrow_node.hide()
+	show_stats_node.hide()
 
-func process_selected() -> void:
-	var available := assigned_team.get_available_allies()
+func get_total_availables() -> int:
 	
-	if available.size() == 0:
-		state_machine.change_state("Idle")
-		return
+	var available := assigned_team.allies
 	
-	var hovering_character := available[_selected_index]
-	
-	arrow_node.point_to(
-		hovering_character,
-		ArrowPointer.PointingDirection.DOWN,
-		Vector2(0, 20),
-		Vector2i(1, 0)
-	)
+	return available.size()
 
-func on_input(event: InputEvent) -> void:
-	#print("Detected character selection action...")
-	var available := assigned_team.get_available_allies()
+func get_hovered() -> PlayableEntity:
+	var available := assigned_team.allies
 	
 	if available.is_empty():
 		state_machine.change_state("Idle")
 		return
+	
+	return available[_selected_index]
+
+func process_selected() -> void:
+	
+	var hovered := get_hovered()
+	
+	if hovered.was_played:
+		arrow_node.modulate = Color(255, 0, 0)
+	else:
+		arrow_node.modulate = arrow_node.self_modulate
+	
+	arrow_node.change_object(hovered)
+
+func on_input(event: InputEvent) -> void:
+	#print("Detected character selection action...")
+	
 	
 	if event.is_action_pressed("up"):
 		self._selected_index -= 1
 	elif event.is_action_pressed("down"):
 		self._selected_index += 1
 	
-	self._selected_index = wrapi(_selected_index, 0, available.size())
+	self._selected_index = wrapi(_selected_index, 0, get_total_availables())
 	
 	process_selected()
 	
+	var hovered := get_hovered()
+	
+	show_stats_node.character = hovered
+	
 	if event.is_action_pressed("select_action"):
-		assigned_team.select_character(available[_selected_index])
+		
+		if not hovered.is_alive() or hovered.was_played:
+			return
+		
+		assigned_team.select_character(hovered)
 		state_machine.change_state("Selecting")

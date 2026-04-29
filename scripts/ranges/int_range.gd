@@ -33,5 +33,4 @@ func put_in_range(value: int) -> int:
 
 ## Generate a random number
 func gen_num() -> int:
-	
 	return randi_range(min_value, max_value)

@@ -2,12 +2,18 @@ extends ActionBase
 
 class_name RunAction
 
+var player: PlayableEntity:
+	get:
+		return controlled_node
+
 func _own_action() -> bool:
 	
-	var prob = controlled_node.run_percent
+	var prob = player.run_percent
 	
 	if randf() <= prob:
-		get_tree().change_scene_to_file("res://scenes/map.tscn")
-		return true
+		player.team.combat.escape()
+		print("Escaped")
+		return false
 	
+	print("No escaped")
 	return super._own_action()

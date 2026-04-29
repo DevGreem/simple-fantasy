@@ -4,32 +4,22 @@ class_name AITeam
 
 @export var order: Array[AIUtils.AITarget] = [AIUtils.AITarget.RANDOM]
 
-
-func _on_set_combat():
-	if combat and combat.changed_turn.is_connected(_on_change_turn):
-			combat.changed_turn.disconnect(_on_change_turn)
-
-func _on_combat_ready():
-	
-	combat.changed_turn.connect(_on_change_turn)
-	_on_change_turn(combat.actual_turn)
-
-func _on_change_turn(new_turn: int):
-	
-	if not combat:
-		return
-	
-	if combat.ended:
-		return
-	
-	if new_turn % 2 == play_turns:
-		_select_entity()
+func start_turn():
+	_select_entity()
 
 func _select_entity():
 	
+	var available := get_available_allies()
+	
+	if available.is_empty():
+		_reset_played_characters()
+		available = get_available_allies()
+	
 	if order[0] == AIUtils.AITarget.RANDOM:
 		
-		var picked_ally: AIEntity = self.get_available_allies().pick_random()
+		var picked_ally: AIEntity = available.pick_random()
 		
-		picked_ally.use_turn()
-		return
+		await picked_ally.use_turn()
+	
+	if combat:
+		combat.end_turn()

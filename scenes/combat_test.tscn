@@ -1,0 +1,175 @@
+[gd_scene format=3 uid="uid://kk32olphk3vn"]
+
+[ext_resource type="Script" uid="uid://cft8bco8byurl" path="res://scenes/combat.gd" id="1_5yxj6"]
+[ext_resource type="Script" uid="uid://cnr4paxy4u7gt" path="res://scripts/teams/ai_team.gd" id="2_e5m62"]
+[ext_resource type="PackedScene" uid="uid://br3w6ar1l0rni" path="res://characters/warrior/enemy_warrior.tscn" id="3_22xx6"]
+[ext_resource type="Script" uid="uid://bmc2jqgr54oth" path="res://scripts/teams/player_team.gd" id="4_12wo5"]
+[ext_resource type="Script" uid="uid://b3kbpl7o45x5s" path="res://scripts/state_machine/state_machine.gd" id="5_w1eeh"]
+[ext_resource type="Script" uid="uid://bt8tkddpd4473" path="res://scripts/teams/states/idle_state.gd" id="6_n0ppl"]
+[ext_resource type="Script" uid="uid://d632vnk7imf6" path="res://scripts/teams/states/selecting_character_state.gd" id="7_wwqv8"]
+[ext_resource type="Script" uid="uid://cp7pabwqjmppa" path="res://scripts/teams/states/selecting_state.gd" id="8_a1r7l"]
+[ext_resource type="Script" uid="uid://orquvx13qs7a" path="res://scripts/teams/states/attacking_state.gd" id="9_la8xk"]
+[ext_resource type="PackedScene" uid="uid://cr2qe2281f5vx" path="res://characters/warrior/warrior.tscn" id="10_4mk0t"]
+[ext_resource type="Texture2D" uid="uid://b0audodechayi" path="res://assets/arrows/simple_arrow.png" id="11_pbeu6"]
+[ext_resource type="Script" uid="uid://n27he60pn0x1" path="res://assets/arrows/arrow_pointer.gd" id="12_6unqy"]
+[ext_resource type="Script" uid="uid://bo4pbuu5cc1go" path="res://scripts/characters/actions/entity_info_container_node.gd" id="13_1ywjy"]
+[ext_resource type="Script" uid="uid://c6jcgfdxiku6r" path="res://scripts/characters/actions/actions_container_node.gd" id="14_kwmn2"]
+[ext_resource type="AudioStream" uid="uid://cm1xo5kygvvs5" path="res://audio/battle.mp3" id="15_tf4cl"]
+[ext_resource type="Script" uid="uid://c27k5d341tcis" path="res://scenes/entity_stats.gd" id="16_22xx6"]
+[ext_resource type="Texture2D" uid="uid://chgglggmv7e15" path="res://assets/backgrounds/forest/forest.png" id="17_e5m62"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gvie1"]
+bg_color = Color(0, 0, 0, 0.6627451)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hmy61"]
+bg_color = Color(0, 0, 0, 0.6627451)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_22xx6"]
+bg_color = Color(0, 0, 0, 0.5176471)
+
+[node name="TestCombat" type="Node2D" unique_id=1783004309]
+
+[node name="World" type="Node2D" parent="." unique_id=1893681277 node_paths=PackedStringArray("left_team", "right_team", "audio_manager")]
+script = ExtResource("1_5yxj6")
+left_team = NodePath("EnemiesTeam")
+right_team = NodePath("PlayerTeam")
+audio_manager = NodePath("../Audio")
+metadata/_custom_type_script = "uid://cft8bco8byurl"
+
+[node name="EnemiesTeam" type="Node" parent="World" unique_id=1201214916]
+script = ExtResource("2_e5m62")
+
+[node name="EnemyWarrior" parent="World/EnemiesTeam" unique_id=1322854397 instance=ExtResource("3_22xx6")]
+position = Vector2(267, 145)
+
+[node name="EnemyWarrior2" parent="World/EnemiesTeam" unique_id=1956202513 instance=ExtResource("3_22xx6")]
+position = Vector2(273, 245)
+
+[node name="EnemyWarrior3" parent="World/EnemiesTeam" unique_id=1362766832 instance=ExtResource("3_22xx6")]
+position = Vector2(269, 343)
+
+[node name="EnemyWarrior4" parent="World/EnemiesTeam" unique_id=218745619 instance=ExtResource("3_22xx6")]
+position = Vector2(272, 433)
+
+[node name="PlayerTeam" type="Node" parent="World" unique_id=1515012192]
+script = ExtResource("4_12wo5")
+
+[node name="StateMachine" type="Node" parent="World/PlayerTeam" unique_id=688001604 node_paths=PackedStringArray("default_state")]
+script = ExtResource("5_w1eeh")
+default_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://b3kbpl7o45x5s"
+
+[node name="Idle" type="Node" parent="World/PlayerTeam/StateMachine" unique_id=1954168649]
+script = ExtResource("6_n0ppl")
+metadata/_custom_type_script = "uid://cdc0fr4l0t3am"
+
+[node name="SelectingCharacter" type="Node" parent="World/PlayerTeam/StateMachine" unique_id=648415379 node_paths=PackedStringArray("arrow_node", "show_stats_node")]
+script = ExtResource("7_wwqv8")
+arrow_node = NodePath("../../../../CanvasLayer/UI/Arrow")
+show_stats_node = NodePath("../../../../CanvasLayer/UI/EntityStats")
+metadata/_custom_type_script = "uid://cdc0fr4l0t3am"
+
+[node name="Selecting" type="Node" parent="World/PlayerTeam/StateMachine" unique_id=464834480 node_paths=PackedStringArray("info_container")]
+script = ExtResource("8_a1r7l")
+info_container = NodePath("../../../../CanvasLayer/UI/EntityInfoContainer")
+metadata/_custom_type_script = "uid://cdc0fr4l0t3am"
+
+[node name="Attacking" type="Node" parent="World/PlayerTeam/StateMachine" unique_id=1586836240 node_paths=PackedStringArray("arrow_node", "entity_stats")]
+script = ExtResource("9_la8xk")
+arrow_node = NodePath("../../../../CanvasLayer/UI/Arrow")
+entity_stats = NodePath("../../../../CanvasLayer/UI/EntityStats")
+metadata/_custom_type_script = "uid://orquvx13qs7a"
+
+[node name="Warrior" parent="World/PlayerTeam" unique_id=1466237971 instance=ExtResource("10_4mk0t")]
+position = Vector2(924, 155)
+
+[node name="Warrior2" parent="World/PlayerTeam" unique_id=16416064 instance=ExtResource("10_4mk0t")]
+position = Vector2(925, 245)
+
+[node name="Warrior3" parent="World/PlayerTeam" unique_id=1377281991 instance=ExtResource("10_4mk0t")]
+position = Vector2(926, 336)
+
+[node name="Warrior4" parent="World/PlayerTeam" unique_id=750264240 instance=ExtResource("10_4mk0t")]
+position = Vector2(928.00006, 428)
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="." unique_id=1484488160]
+stream = ExtResource("15_tf4cl")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1004476070]
+
+[node name="UI" type="Control" parent="CanvasLayer" unique_id=216462789]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+metadata/_edit_lock_ = true
+
+[node name="Arrow" type="TextureRect" parent="CanvasLayer/UI" unique_id=1749777467]
+texture_filter = 2
+layout_mode = 0
+offset_left = -51.0
+offset_top = -1.0
+offset_right = -11.0
+offset_bottom = 39.0
+texture = ExtResource("11_pbeu6")
+script = ExtResource("12_6unqy")
+at_his = 1
+
+[node name="EntityInfoContainer" type="HBoxContainer" parent="CanvasLayer/UI" unique_id=1198657990 node_paths=PackedStringArray("player_team")]
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -127.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("13_1ywjy")
+player_team = NodePath("../../../World/PlayerTeam")
+
+[node name="Actions" type="ItemList" parent="CanvasLayer/UI/EntityInfoContainer" unique_id=515437691 node_paths=PackedStringArray("arrow")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_gvie1")
+script = ExtResource("14_kwmn2")
+arrow = NodePath("../../Arrow")
+
+[node name="ActionDescription" type="Label" parent="CanvasLayer/UI/EntityInfoContainer" unique_id=322044844]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/normal = SubResource("StyleBoxFlat_hmy61")
+
+[node name="EntityStats" type="RichTextLabel" parent="CanvasLayer/UI" unique_id=1756724837]
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -152.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_22xx6")
+script = ExtResource("16_22xx6")
+
+[node name="Background" type="CanvasLayer" parent="." unique_id=959063202]
+layer = -100
+
+[node name="FinalFantasyGrass" type="TextureRect" parent="Background" unique_id=1889701759]
+z_index = -100
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("17_e5m62")
+metadata/_edit_lock_ = true

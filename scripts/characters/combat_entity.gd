@@ -6,7 +6,6 @@ signal on_play
 signal on_reset_play
 
 var team: CombatTeam
-@export var entity_name: String
 var was_played: bool = false:
 	set(value):
 		
@@ -16,24 +15,12 @@ var was_played: bool = false:
 		else:
 			on_reset_play.emit()
 
-
-@export_category("Stats")
-@export var hp: int = 1:
-	get:
-		return hp
+@export var stats: EntityData:
 	set(value):
 		
-		if value <= 0:
-			hp = 0
-			self._die()
-			return
-			#print_rich('**Character ', self, ' Died**')
-		else:
-			hp = value
-			
+		stats = value
+		_init_stats()
 
-@export var dmg: IntRange = IntRange.create(0, 1)
-@export var def: int = 0
 var blocking: bool = false:
 	set(value):
 		
@@ -41,8 +28,18 @@ var blocking: bool = false:
 		blocking = value
 
 func _ready():
+	self.stats = stats.duplicate(true)
 	self.animation_finished.connect(self._on_animation_finished)
 	self.play("idle")
+	prints("Loaded entity: \n", self.stats, "\n")
+
+func _init_stats() -> void:
+	
+	if not stats:
+		return
+	
+	self.sprite_frames = stats.combat_sprite
+	self.stats.on_die.connect(_die)
 
 func get_actions() -> Array[ActionBase]:
 	var actions_container: ActionsContainer = get_node("ActionsContainer")
@@ -58,11 +55,14 @@ func attack(enemy: CombatEntity) -> void:
 func get_damage(entity: CombatEntity) -> void:
 	
 	#prints("Received dmg stats: ", entity.dmg.min_value, " ", entity.dmg.max_value)
-	var damage = max(0, entity.dmg.gen_num() - (self.def if self.blocking else 0))
-	if self.blocking:
-		self.unblock()
+	var damage = max(
+		0,
+		entity.stats.dmg.gen_num() - (self.stats.def.gen_num() if self.blocking else 0)
+	)
 	
-	self.hp -= damage
+	prints("Received damage: ", damage)
+	
+	self.stats.hp -= damage
 	
 	if is_alive():
 		self.play("damaged")
@@ -126,27 +126,29 @@ func _attack_animation():
 	tween.tween_method(func(t):
 		position = target.lerp(start, t)
 	, 0.0, 1.0, 0.15)
+	
+	await tween.finished
 
 func _on_animation_finished() -> void:
 	
-	prints("Finished animation:", animation)
+	#prints("Finished animation:", animation)
 	
 	if animation == "downed":
-		prints("Executing died")
-		await get_tree().create_timer(0.2).timeout
-		self.stop()
-		self.animation = "died"
-		self.play()
+		#prints("Executing died")
+		await get_tree().create_timer(0.4).timeout
+		self.play("died")
 		return
 	
 	if animation == "died":
-		prints("Totally died")
+		#prints("Totally died")
 		return
 	
-	prints("Executing idle")
-	self.stop()
-	self.animation = "idle"
-	self.play()
+	if blocking:
+		self.play("blocking")
+		return
+	
+	#prints("Executing idle")
+	self.play("idle")
 
 func is_alive() -> bool:
-	return hp > 0
+	return self.stats.hp > 0

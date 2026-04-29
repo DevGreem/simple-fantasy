@@ -15,6 +15,11 @@ var selected_character: PlayableEntity:
 		on_change_character.emit(value)
 
 var has_character_selected := false
+var state_machine: StateMachine
+
+func _ready() -> void:
+	super._ready()
+	state_machine = get_node("StateMachine")
 
 func select_character(character: PlayableEntity = null):
 	
@@ -30,6 +35,9 @@ func select_character(character: PlayableEntity = null):
 	if selected_character:
 		selected_character.unselect()
 		on_unselect_character.emit()
+		
+		if selected_character.blocking:
+			selected_character.play("blocking")
 
 var selected_enemy: AIEntity:
 	set(value):
@@ -50,3 +58,12 @@ func select_enemy(enemy: AIEntity = null):
 	
 	if selected_enemy:
 		on_unselect_enemy.emit()
+
+func start_turn():
+	var available := get_available_allies()
+	prints("Available characters: ", available)
+	
+	if available.is_empty():
+		_reset_played_characters()
+	
+	state_machine.change_state("SelectingCharacter")

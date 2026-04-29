@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="EntityData" format=3 uid="uid://cpwgmmouvyn8h"]
+
+[ext_resource type="Script" uid="uid://do56o8j56v1q3" path="res://resources/entity_data.gd" id="1_nliw2"]
+[ext_resource type="Script" uid="uid://cuv5b0kvf3qqf" path="res://scripts/ranges/int_range.gd" id="1_uanm1"]
+[ext_resource type="SpriteFrames" uid="uid://d0pqrx7a6mkwl" path="res://characters/warrior/combat_sprites.tres" id="1_wgifn"]
+[ext_resource type="SpriteFrames" uid="uid://xr7q0kisgg8h" path="res://characters/warrior/map_sprites.tres" id="3_6x0nb"]
+
+[sub_resource type="Resource" id="Resource_wgifn"]
+script = ExtResource("1_uanm1")
+min_value = 5
+max_value = 10
+metadata/_custom_type_script = "uid://cuv5b0kvf3qqf"
+
+[sub_resource type="Resource" id="Resource_xju84"]
+script = ExtResource("1_uanm1")
+min_value = 20
+max_value = 30
+metadata/_custom_type_script = "uid://cuv5b0kvf3qqf"
+
+[resource]
+script = ExtResource("1_nliw2")
+name = "Warrior"
+map_sprite = ExtResource("3_6x0nb")
+combat_sprite = ExtResource("1_wgifn")
+max_hp = 100
+hp = 100
+dmg = SubResource("Resource_xju84")
+def = SubResource("Resource_wgifn")
+max_mana = 5
+mana = 5
+metadata/_custom_type_script = "uid://do56o8j56v1q3"

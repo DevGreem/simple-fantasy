@@ -8,17 +8,26 @@ var assigned_team: PlayerTeam:
 
 var _selected_index: int = 0
 @export var arrow_node: ArrowPointer
+@export var entity_stats: EntityStatsNode
 var _is_acting := false
 
-func start():
+func start(..._args):
 	_selected_index = 0;
 	assigned_team.selected_enemy = null
+	arrow_node.select_object(
+		get_hovered(),
+		ArrowPointer.PointingDirection.LEFT,
+		ArrowPointer.Sides.RIGHT,
+		Vector2(25, 0)
+	)
+	arrow_node.show()
 
 func end():
 	_is_acting = false
-	arrow_node.unpoint()
+	arrow_node.hide()
+	entity_stats.unselect()
 
-func process_selected():
+func get_hovered() -> AIEntity:
 	
 	var available := assigned_team.enemies_team.get_alive_allies()
 	
@@ -26,13 +35,18 @@ func process_selected():
 		state_machine.change_state("Idle")
 		return
 	
-	var hovering_character := available[_selected_index]
+	var hovering := available[_selected_index]
 	
-	arrow_node.point_to(
-		hovering_character,
-		ArrowPointer.PointingDirection.DOWN,
-		Vector2(0, 20),
-		Vector2i(1, 0)
+	return hovering
+
+func process_selected():
+	
+	var hovering_character := get_hovered()
+	
+	entity_stats.select(hovering_character)
+	
+	arrow_node.change_object(
+		hovering_character
 	)
 
 func on_input(event: InputEvent) -> void:
@@ -49,23 +63,36 @@ func on_input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("up"):
 		self._selected_index -= 1
-	
-	if event.is_action_pressed("down"):
+	elif event.is_action_pressed("down"):
 		self._selected_index += 1
 	
 	self._selected_index = wrapi(_selected_index, 0, available.size())
 	
 	process_selected()
 	
+	if event.is_action_pressed("unselect_action"):
+		get_viewport().set_input_as_handled()
+		state_machine.change_state("Selecting")
+		assigned_team.select_character(assigned_team.selected_character)
+		return
+	
 	if event.is_action_pressed("select_action"):
+		get_viewport().set_input_as_handled()
+		
 		_is_acting = true
-		assigned_team.selected_enemy = available[_selected_index]
-		assigned_team.selected_character.attack(
-			assigned_team.selected_enemy
+		var player := assigned_team.selected_character
+		var character := available[_selected_index]
+		
+		assigned_team.selected_enemy = character
+		player.attack(
+			character
 		)
 		
-		await assigned_team.selected_character.animation_finished
+		if player.is_playing() and not player.sprite_frames.get_animation_loop(character.animation):
+			await player.animation_finished
+		else:
+			await get_tree().create_timer(0.3).timeout
 		
 		state_machine.change_state("Idle")
-		assigned_team.selected_character.unselect()
-		assigned_team.combat.next_turn()
+		player.unselect()
+		assigned_team.combat.end_turn()

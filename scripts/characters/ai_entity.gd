@@ -30,10 +30,11 @@ func use_turn() -> void:
 	
 	if type == EntityAIType.RANDOM:
 		attack_player()
+	
+	if is_playing() and not sprite_frames.get_animation_loop(animation):
 		await self.animation_finished
 	
 	was_played = true
-	self.team.combat.next_turn()
 
 func attack_player() -> void:
 	var enemies = self.team.enemies_team.get_alive_allies()

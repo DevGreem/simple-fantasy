@@ -1,19 +1,13 @@
 [gd_scene format=3 uid="uid://br3w6ar1l0rni"]
 
 [ext_resource type="PackedScene" uid="uid://bboed8ypyawwh" path="res://characters/entity.tscn" id="1_yqcpg"]
-[ext_resource type="SpriteFrames" uid="uid://d0pqrx7a6mkwl" path="res://characters/warrior/sprites.tres" id="2_ws6e7"]
-[ext_resource type="Script" uid="uid://cuv5b0kvf3qqf" path="res://scripts/ranges/int_range.gd" id="3_1pmgx"]
+[ext_resource type="SpriteFrames" uid="uid://d0pqrx7a6mkwl" path="res://characters/warrior/combat_sprites.tres" id="2_ws6e7"]
 [ext_resource type="Script" uid="uid://dktvnnablg8rj" path="res://scripts/characters/ai_entity.gd" id="3_ws6e7"]
-
-[sub_resource type="Resource" id="Resource_ws6e7"]
-script = ExtResource("3_1pmgx")
-min_value = 5
-max_value = 10
-metadata/_custom_type_script = "uid://cuv5b0kvf3qqf"
+[ext_resource type="Resource" uid="uid://cpwgmmouvyn8h" path="res://characters/warrior/warrior.tres" id="4_ws6e7"]
 
 [node name="EnemyWarrior" unique_id=1322854397 instance=ExtResource("1_yqcpg")]
 texture_filter = 1
-scale = Vector2(4, 4)
+scale = Vector2(3, 3)
 sprite_frames = ExtResource("2_ws6e7")
 animation = &"idle"
 autoplay = "idle"
@@ -21,7 +15,4 @@ script = ExtResource("3_ws6e7")
 priority = 0
 type = 0
 target = Array[int]([0])
-entity_name = "Enemy Warrior"
-hp = 20
-dmg = SubResource("Resource_ws6e7")
-def = 0
+stats = ExtResource("4_ws6e7")
