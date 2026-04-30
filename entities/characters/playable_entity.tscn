@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bgol0rt5ftggr"]
+
+[ext_resource type="PackedScene" uid="uid://bboed8ypyawwh" path="res://entities/entity.tscn" id="1_p0wgt"]
+[ext_resource type="Script" uid="uid://befgjt3cd4mke" path="res://scripts/characters/playable_entity.gd" id="2_2xk24"]
+
+[node name="PlayableEntity" unique_id=1322854397 instance=ExtResource("1_p0wgt")]
+script = ExtResource("2_2xk24")
+run_percent = 0.2

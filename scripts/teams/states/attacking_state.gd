@@ -9,9 +9,11 @@ var assigned_team: PlayerTeam:
 var _selected_index: int = 0
 @export var arrow_node: ArrowPointer
 @export var entity_stats: EntityStatsNode
+var _attack_animation: AnimatedSprite2D 
+var _attack_audio: AudioStreamPlayer2D
 var _is_acting := false
 
-func start(..._args):
+func start(args = []):
 	_selected_index = 0;
 	assigned_team.selected_enemy = null
 	arrow_node.select_object(
@@ -20,6 +22,14 @@ func start(..._args):
 		ArrowPointer.Sides.RIGHT,
 		Vector2(25, 0)
 	)
+	
+	if not args.is_empty():
+		
+		if args.size() > 0:
+			_attack_animation = args[0] as AnimatedSprite2D
+		
+		if args.size() > 1:
+			_attack_audio = args[1] as AudioStreamPlayer2D
 	arrow_node.show()
 
 func end():
@@ -88,6 +98,20 @@ func on_input(event: InputEvent) -> void:
 			character
 		)
 		
+		if _attack_audio:
+			player.add_child(_attack_audio)
+			_attack_audio.play()
+			_attack_audio.finished.connect(
+				func():
+					player.remove_child(_attack_audio)
+			)
+		
+		if _attack_animation:
+			character.add_child(_attack_animation)
+			_attack_animation.play()
+			await _attack_animation.animation_finished
+			character.remove_child(_attack_animation)
+		
 		if player.is_playing() and not player.sprite_frames.get_animation_loop(character.animation):
 			await player.animation_finished
 		else:
@@ -95,4 +119,4 @@ func on_input(event: InputEvent) -> void:
 		
 		state_machine.change_state("Idle")
 		player.unselect()
-		assigned_team.combat.end_turn()
+		assigned_team.combat.end_turn(player)

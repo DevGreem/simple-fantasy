@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Spell" format=3 uid="uid://n1gd2sayhuoe"]
+
+[ext_resource type="Script" uid="uid://0fjnaka6gj1" path="res://resources/spells/spell_effect.gd" id="1_m6pow"]
+[ext_resource type="Script" uid="uid://cexn78qlp65y0" path="res://resources/spells/spell.gd" id="2_3dfce"]
+[ext_resource type="Resource" uid="uid://cu4um7tbqtgms" path="res://resources/spells/fireball/effect.tres" id="2_us6d5"]
+
+[resource]
+script = ExtResource("2_3dfce")
+name = "Fireball"
+description = "Throw a fireball to an enemy"
+mana_cost = 10
+effect = Array[ExtResource("1_m6pow")]([ExtResource("2_us6d5")])
+metadata/_custom_type_script = "uid://cexn78qlp65y0"

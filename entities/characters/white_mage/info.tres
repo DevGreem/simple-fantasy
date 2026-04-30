@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="EntityData" format=3 uid="uid://dnelibmf225ln"]
+
+[ext_resource type="Script" uid="uid://crnuayr6f8uty" path="res://resources/actions/action_base.gd" id="1_sp4su"]
+[ext_resource type="Script" uid="uid://do56o8j56v1q3" path="res://resources/entities/entity_data.gd" id="2_8w5ip"]
+[ext_resource type="Resource" uid="uid://djvu710eck0ru" path="res://entities/default/habilities/basic_attack.tres" id="2_emos8"]
+[ext_resource type="Resource" uid="uid://c3r06akk367jn" path="res://entities/default/habilities/basic_cast_spell.tres" id="3_csxdj"]
+[ext_resource type="Resource" uid="uid://dmmp3mdiagcw8" path="res://entities/default/habilities/basic_block.tres" id="3_m3bnf"]
+[ext_resource type="Resource" uid="uid://b6ghdyer8ni5v" path="res://entities/default/habilities/basic_run.tres" id="4_csxdj"]
+[ext_resource type="SpriteFrames" uid="uid://cgpkiwntf6aj4" path="res://entities/characters/white_mage/combat_sprites.tres" id="5_qd3uu"]
+[ext_resource type="Script" uid="uid://cuv5b0kvf3qqf" path="res://scripts/ranges/int_range.gd" id="6_f0yus"]
+[ext_resource type="SpriteFrames" uid="uid://cmxmg58wb2d4q" path="res://entities/characters/white_mage/map_sprites.tres" id="7_nttgq"]
+[ext_resource type="Script" uid="uid://cexn78qlp65y0" path="res://resources/spells/spell.gd" id="10_qd3uu"]
+[ext_resource type="Resource" uid="uid://b0ckip7b2xo15" path="res://resources/spells/god_healing/god_healing.tres" id="11_qd3uu"]
+
+[sub_resource type="Resource" id="Resource_v83h2"]
+script = ExtResource("6_f0yus")
+min_value = 15
+max_value = 23
+metadata/_custom_type_script = "uid://cuv5b0kvf3qqf"
+
+[sub_resource type="Resource" id="Resource_kwdqw"]
+script = ExtResource("6_f0yus")
+min_value = 3
+max_value = 5
+metadata/_custom_type_script = "uid://cuv5b0kvf3qqf"
+
+[resource]
+script = ExtResource("2_8w5ip")
+name = "White Mage"
+map_sprite = ExtResource("7_nttgq")
+combat_sprite = ExtResource("5_qd3uu")
+actions = Array[ExtResource("1_sp4su")]([ExtResource("2_emos8"), ExtResource("3_csxdj"), ExtResource("3_m3bnf"), ExtResource("4_csxdj")])
+spells = Array[ExtResource("10_qd3uu")]([ExtResource("11_qd3uu")])
+max_hp = 90
+hp = 90
+dmg = SubResource("Resource_kwdqw")
+def = SubResource("Resource_v83h2")
+max_mana = 18
+mana = 18
+metadata/_custom_type_script = "uid://do56o8j56v1q3"

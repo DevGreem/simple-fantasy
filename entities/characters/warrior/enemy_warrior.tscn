@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://br3w6ar1l0rni"]
+
+[ext_resource type="PackedScene" uid="uid://bboed8ypyawwh" path="res://entities/entity.tscn" id="1_yqcpg"]
+[ext_resource type="SpriteFrames" uid="uid://d0pqrx7a6mkwl" path="res://entities/characters/warrior/combat_sprites.tres" id="2_ws6e7"]
+[ext_resource type="Script" uid="uid://dktvnnablg8rj" path="res://scripts/characters/ai_entity.gd" id="3_ws6e7"]
+[ext_resource type="Resource" uid="uid://cpwgmmouvyn8h" path="res://entities/characters/warrior/info.tres" id="4_ws6e7"]
+
+[node name="EnemyWarrior" unique_id=1322854397 instance=ExtResource("1_yqcpg")]
+texture_filter = 1
+sprite_frames = ExtResource("2_ws6e7")
+animation = &"idle"
+autoplay = "idle"
+script = ExtResource("3_ws6e7")
+priority = 0
+type = 0
+target = Array[int]([0])
+stats = ExtResource("4_ws6e7")

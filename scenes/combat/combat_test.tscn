@@ -2,21 +2,743 @@
 
 [ext_resource type="Script" uid="uid://cft8bco8byurl" path="res://scenes/combat/combat.gd" id="1_5yxj6"]
 [ext_resource type="Script" uid="uid://cnr4paxy4u7gt" path="res://scripts/teams/ai_team.gd" id="2_e5m62"]
-[ext_resource type="PackedScene" uid="uid://br3w6ar1l0rni" path="res://characters/warrior/enemy_warrior.tscn" id="3_22xx6"]
+[ext_resource type="PackedScene" uid="uid://br3w6ar1l0rni" path="res://entities/characters/warrior/enemy_warrior.tscn" id="3_22xx6"]
 [ext_resource type="Script" uid="uid://bmc2jqgr54oth" path="res://scripts/teams/player_team.gd" id="4_12wo5"]
+[ext_resource type="Texture2D" uid="uid://w7dlrsbj5guk" path="res://assets/entities/final_characters_3.png" id="4_v6ywg"]
 [ext_resource type="Script" uid="uid://b3kbpl7o45x5s" path="res://scripts/state_machine/state_machine.gd" id="5_w1eeh"]
 [ext_resource type="Script" uid="uid://bt8tkddpd4473" path="res://scripts/teams/states/idle_state.gd" id="6_n0ppl"]
 [ext_resource type="Script" uid="uid://d632vnk7imf6" path="res://scripts/teams/states/selecting_character_state.gd" id="7_wwqv8"]
 [ext_resource type="Script" uid="uid://cp7pabwqjmppa" path="res://scripts/teams/states/selecting_state.gd" id="8_a1r7l"]
 [ext_resource type="Script" uid="uid://orquvx13qs7a" path="res://scripts/teams/states/attacking_state.gd" id="9_la8xk"]
-[ext_resource type="PackedScene" uid="uid://cr2qe2281f5vx" path="res://characters/warrior/warrior.tscn" id="10_4mk0t"]
+[ext_resource type="PackedScene" uid="uid://cr2qe2281f5vx" path="res://entities/characters/warrior/warrior.tscn" id="10_4mk0t"]
+[ext_resource type="Script" uid="uid://crnuayr6f8uty" path="res://resources/actions/action_base.gd" id="11_jmnr5"]
 [ext_resource type="Texture2D" uid="uid://b0audodechayi" path="res://assets/arrows/simple_arrow.png" id="11_pbeu6"]
+[ext_resource type="Script" uid="uid://cexn78qlp65y0" path="res://resources/spells/spell.gd" id="11_qlvq2"]
 [ext_resource type="Script" uid="uid://n27he60pn0x1" path="res://assets/arrows/arrow_pointer.gd" id="12_6unqy"]
-[ext_resource type="Script" uid="uid://bo4pbuu5cc1go" path="res://scripts/characters/actions/entity_info_container_node.gd" id="13_1ywjy"]
-[ext_resource type="Script" uid="uid://c6jcgfdxiku6r" path="res://scripts/characters/actions/actions_container_node.gd" id="14_kwmn2"]
-[ext_resource type="AudioStream" uid="uid://cm1xo5kygvvs5" path="res://audio/battle.mp3" id="15_tf4cl"]
+[ext_resource type="Resource" uid="uid://djvu710eck0ru" path="res://entities/default/habilities/basic_attack.tres" id="12_317tc"]
+[ext_resource type="Script" uid="uid://bo4pbuu5cc1go" path="res://resources/actions/nodes/entity_info_container_node.gd" id="13_1ywjy"]
+[ext_resource type="Resource" uid="uid://dmmp3mdiagcw8" path="res://entities/default/habilities/basic_block.tres" id="13_j1p24"]
+[ext_resource type="Script" uid="uid://c6jcgfdxiku6r" path="res://resources/actions/nodes/actions_container_node.gd" id="14_kwmn2"]
+[ext_resource type="Resource" uid="uid://b6ghdyer8ni5v" path="res://entities/default/habilities/basic_run.tres" id="14_v6ywg"]
+[ext_resource type="SpriteFrames" uid="uid://d0pqrx7a6mkwl" path="res://entities/characters/warrior/combat_sprites.tres" id="15_qlvq2"]
+[ext_resource type="AudioStream" uid="uid://cm1xo5kygvvs5" path="res://audio/combat/battle.mp3" id="15_tf4cl"]
 [ext_resource type="Script" uid="uid://c27k5d341tcis" path="res://scripts/characters/entity_stats.gd" id="16_22xx6"]
+[ext_resource type="Script" uid="uid://cuv5b0kvf3qqf" path="res://scripts/ranges/int_range.gd" id="16_fghpx"]
+[ext_resource type="SpriteFrames" uid="uid://xr7q0kisgg8h" path="res://entities/characters/warrior/map_sprites.tres" id="17_btdx0"]
 [ext_resource type="Texture2D" uid="uid://chgglggmv7e15" path="res://assets/backgrounds/forest/forest.png" id="17_e5m62"]
+[ext_resource type="Script" uid="uid://do56o8j56v1q3" path="res://resources/entities/entity_data.gd" id="18_fjp3d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f2vfh"]
+atlas = ExtResource("4_v6ywg")
+region = Rect2(168, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cre4o"]
+atlas = ExtResource("4_v6ywg")
+region = Rect2(216, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cee54"]
+atlas = ExtResource("4_v6ywg")
+region = Rect2(120, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjp4q"]
+atlas = ExtResource("4_v6ywg")
+region = Rect2(144, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3gbb4"]
+atlas = ExtResource("4_v6ywg")
+region = Rect2(240, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25b21"]
+atlas = ExtResource("4_v6ywg")
+region = Rect2(192, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y2n37"]
+atlas = ExtResource("4_v6ywg")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jnm6t"]
+atlas = ExtResource("4_v6ywg")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvo5b"]
+atlas = ExtResource("4_v6ywg")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5y4a0"]
+atlas = ExtResource("4_v6ywg")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tipdi"]
+atlas = ExtResource("4_v6ywg")
+region = Rect2(96, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v6ywg"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2vfh")
+}],
+"loop": false,
+"name": &"attacking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cre4o")
+}],
+"loop": true,
+"name": &"blocking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cee54")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjp4q")
+}],
+"loop": false,
+"name": &"damaged",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3gbb4")
+}],
+"loop": true,
+"name": &"died",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25b21")
+}],
+"loop": false,
+"name": &"downed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y2n37")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2vfh")
+}],
+"loop": false,
+"name": &"magic",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2vfh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnm6t")
+}],
+"loop": true,
+"name": &"victory",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnm6t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvo5b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5y4a0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tipdi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y2n37")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 10.0
+}]
+
+[sub_resource type="Resource" id="Resource_wgifn"]
+script = ExtResource("16_fghpx")
+min_value = 5
+max_value = 10
+metadata/_custom_type_script = "uid://cuv5b0kvf3qqf"
+
+[sub_resource type="Resource" id="Resource_xju84"]
+script = ExtResource("16_fghpx")
+min_value = 20
+max_value = 30
+metadata/_custom_type_script = "uid://cuv5b0kvf3qqf"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oj286"]
+atlas = ExtResource("4_v6ywg")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rm6fj"]
+atlas = ExtResource("4_v6ywg")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dr2a6"]
+atlas = ExtResource("4_v6ywg")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4n1rb"]
+atlas = ExtResource("4_v6ywg")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jjp7q"]
+atlas = ExtResource("4_v6ywg")
+region = Rect2(96, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qlvq2"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oj286")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rm6fj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dr2a6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4n1rb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jjp7q")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_fghpx"]
+resource_local_to_scene = true
+script = ExtResource("18_fjp3d")
+name = "Warrior"
+map_sprite = SubResource("SpriteFrames_qlvq2")
+combat_sprite = SubResource("SpriteFrames_v6ywg")
+actions = Array[ExtResource("11_jmnr5")]([ExtResource("12_317tc"), ExtResource("13_j1p24"), ExtResource("14_v6ywg")])
+max_hp = 150
+hp = 150
+dmg = SubResource("Resource_xju84")
+def = SubResource("Resource_wgifn")
+max_mana = 5
+mana = 5
+metadata/_custom_type_script = "uid://do56o8j56v1q3"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_btdx0"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2vfh")
+}],
+"loop": false,
+"name": &"attacking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cre4o")
+}],
+"loop": true,
+"name": &"blocking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cee54")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjp4q")
+}],
+"loop": false,
+"name": &"damaged",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3gbb4")
+}],
+"loop": true,
+"name": &"died",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25b21")
+}],
+"loop": false,
+"name": &"downed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y2n37")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2vfh")
+}],
+"loop": false,
+"name": &"magic",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2vfh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnm6t")
+}],
+"loop": true,
+"name": &"victory",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnm6t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvo5b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5y4a0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tipdi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y2n37")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 10.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fjp3d"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oj286")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rm6fj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dr2a6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4n1rb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jjp7q")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_acnad"]
+resource_local_to_scene = true
+script = ExtResource("18_fjp3d")
+name = "Warrior"
+map_sprite = SubResource("SpriteFrames_fjp3d")
+combat_sprite = SubResource("SpriteFrames_btdx0")
+actions = Array[ExtResource("11_jmnr5")]([ExtResource("12_317tc"), ExtResource("13_j1p24"), ExtResource("14_v6ywg")])
+max_hp = 150
+hp = 150
+dmg = SubResource("Resource_xju84")
+def = SubResource("Resource_wgifn")
+max_mana = 5
+mana = 5
+metadata/_custom_type_script = "uid://do56o8j56v1q3"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s6u87"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2vfh")
+}],
+"loop": false,
+"name": &"attacking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cre4o")
+}],
+"loop": true,
+"name": &"blocking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cee54")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjp4q")
+}],
+"loop": false,
+"name": &"damaged",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3gbb4")
+}],
+"loop": true,
+"name": &"died",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25b21")
+}],
+"loop": false,
+"name": &"downed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y2n37")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2vfh")
+}],
+"loop": false,
+"name": &"magic",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2vfh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnm6t")
+}],
+"loop": true,
+"name": &"victory",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnm6t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvo5b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5y4a0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tipdi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y2n37")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 10.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vv1hh"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oj286")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rm6fj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dr2a6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4n1rb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jjp7q")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_mj5mg"]
+resource_local_to_scene = true
+script = ExtResource("18_fjp3d")
+name = "Warrior"
+map_sprite = SubResource("SpriteFrames_vv1hh")
+combat_sprite = SubResource("SpriteFrames_s6u87")
+actions = Array[ExtResource("11_jmnr5")]([ExtResource("12_317tc"), ExtResource("13_j1p24"), ExtResource("14_v6ywg")])
+max_hp = 150
+hp = 150
+dmg = SubResource("Resource_xju84")
+def = SubResource("Resource_wgifn")
+max_mana = 5
+mana = 5
+metadata/_custom_type_script = "uid://do56o8j56v1q3"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g6gvu"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2vfh")
+}],
+"loop": false,
+"name": &"attacking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cre4o")
+}],
+"loop": true,
+"name": &"blocking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cee54")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjp4q")
+}],
+"loop": false,
+"name": &"damaged",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3gbb4")
+}],
+"loop": true,
+"name": &"died",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25b21")
+}],
+"loop": false,
+"name": &"downed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y2n37")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2vfh")
+}],
+"loop": false,
+"name": &"magic",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2vfh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnm6t")
+}],
+"loop": true,
+"name": &"victory",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnm6t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvo5b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5y4a0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tipdi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y2n37")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 10.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r1m0o"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oj286")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rm6fj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dr2a6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4n1rb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jjp7q")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_hnl2t"]
+resource_local_to_scene = true
+script = ExtResource("18_fjp3d")
+name = "Warrior"
+map_sprite = SubResource("SpriteFrames_r1m0o")
+combat_sprite = SubResource("SpriteFrames_g6gvu")
+actions = Array[ExtResource("11_jmnr5")]([ExtResource("12_317tc"), ExtResource("13_j1p24"), ExtResource("14_v6ywg")])
+max_hp = 150
+hp = 150
+dmg = SubResource("Resource_xju84")
+def = SubResource("Resource_wgifn")
+max_mana = 5
+mana = 5
+metadata/_custom_type_script = "uid://do56o8j56v1q3"
+
+[sub_resource type="Resource" id="Resource_mjkww"]
+script = ExtResource("16_fghpx")
+min_value = 5
+max_value = 10
+metadata/_custom_type_script = "uid://cuv5b0kvf3qqf"
+
+[sub_resource type="Resource" id="Resource_70exd"]
+script = ExtResource("16_fghpx")
+min_value = 20
+max_value = 30
+metadata/_custom_type_script = "uid://cuv5b0kvf3qqf"
+
+[sub_resource type="Resource" id="Resource_45m1l"]
+script = ExtResource("18_fjp3d")
+name = "Warrior"
+map_sprite = ExtResource("17_btdx0")
+combat_sprite = ExtResource("15_qlvq2")
+actions = Array[ExtResource("11_jmnr5")]([ExtResource("12_317tc"), ExtResource("13_j1p24"), ExtResource("14_v6ywg")])
+max_hp = 100
+hp = 100
+dmg = SubResource("Resource_70exd")
+def = SubResource("Resource_mjkww")
+max_mana = 5
+mana = 5
+metadata/_custom_type_script = "uid://do56o8j56v1q3"
+
+[sub_resource type="Resource" id="Resource_g7dnp"]
+script = ExtResource("16_fghpx")
+min_value = 5
+max_value = 10
+metadata/_custom_type_script = "uid://cuv5b0kvf3qqf"
+
+[sub_resource type="Resource" id="Resource_u727n"]
+script = ExtResource("16_fghpx")
+min_value = 20
+max_value = 30
+metadata/_custom_type_script = "uid://cuv5b0kvf3qqf"
+
+[sub_resource type="Resource" id="Resource_213qv"]
+script = ExtResource("18_fjp3d")
+name = "Warrior"
+map_sprite = ExtResource("17_btdx0")
+combat_sprite = ExtResource("15_qlvq2")
+actions = Array[ExtResource("11_jmnr5")]([ExtResource("12_317tc"), ExtResource("13_j1p24"), ExtResource("14_v6ywg")])
+max_hp = 100
+hp = 100
+dmg = SubResource("Resource_u727n")
+def = SubResource("Resource_g7dnp")
+max_mana = 5
+mana = 5
+metadata/_custom_type_script = "uid://do56o8j56v1q3"
+
+[sub_resource type="Resource" id="Resource_0uu7u"]
+script = ExtResource("16_fghpx")
+min_value = 5
+max_value = 10
+metadata/_custom_type_script = "uid://cuv5b0kvf3qqf"
+
+[sub_resource type="Resource" id="Resource_bx0gb"]
+script = ExtResource("16_fghpx")
+min_value = 20
+max_value = 30
+metadata/_custom_type_script = "uid://cuv5b0kvf3qqf"
+
+[sub_resource type="Resource" id="Resource_tqgk1"]
+script = ExtResource("18_fjp3d")
+name = "Warrior"
+map_sprite = ExtResource("17_btdx0")
+combat_sprite = ExtResource("15_qlvq2")
+actions = Array[ExtResource("11_jmnr5")]([ExtResource("12_317tc"), ExtResource("13_j1p24"), ExtResource("14_v6ywg")])
+max_hp = 100
+hp = 100
+dmg = SubResource("Resource_bx0gb")
+def = SubResource("Resource_0uu7u")
+max_mana = 5
+mana = 5
+metadata/_custom_type_script = "uid://do56o8j56v1q3"
+
+[sub_resource type="Resource" id="Resource_y1v44"]
+script = ExtResource("16_fghpx")
+min_value = 5
+max_value = 10
+metadata/_custom_type_script = "uid://cuv5b0kvf3qqf"
+
+[sub_resource type="Resource" id="Resource_i0s1a"]
+script = ExtResource("16_fghpx")
+min_value = 20
+max_value = 30
+metadata/_custom_type_script = "uid://cuv5b0kvf3qqf"
+
+[sub_resource type="Resource" id="Resource_nqrnt"]
+script = ExtResource("18_fjp3d")
+name = "Warrior"
+map_sprite = ExtResource("17_btdx0")
+combat_sprite = ExtResource("15_qlvq2")
+actions = Array[ExtResource("11_jmnr5")]([ExtResource("12_317tc"), ExtResource("13_j1p24"), ExtResource("14_v6ywg")])
+max_hp = 100
+hp = 100
+dmg = SubResource("Resource_i0s1a")
+def = SubResource("Resource_y1v44")
+max_mana = 5
+mana = 5
+metadata/_custom_type_script = "uid://do56o8j56v1q3"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gvie1"]
 bg_color = Color(0, 0, 0, 0.6627451)
@@ -43,15 +765,23 @@ script = ExtResource("2_e5m62")
 
 [node name="EnemyWarrior" parent="World/EnemiesTeam" unique_id=1322854397 instance=ExtResource("3_22xx6")]
 position = Vector2(267, 145)
+sprite_frames = SubResource("SpriteFrames_v6ywg")
+stats = SubResource("Resource_fghpx")
 
 [node name="EnemyWarrior2" parent="World/EnemiesTeam" unique_id=1956202513 instance=ExtResource("3_22xx6")]
 position = Vector2(273, 245)
+sprite_frames = SubResource("SpriteFrames_btdx0")
+stats = SubResource("Resource_acnad")
 
 [node name="EnemyWarrior3" parent="World/EnemiesTeam" unique_id=1362766832 instance=ExtResource("3_22xx6")]
 position = Vector2(269, 343)
+sprite_frames = SubResource("SpriteFrames_s6u87")
+stats = SubResource("Resource_mj5mg")
 
 [node name="EnemyWarrior4" parent="World/EnemiesTeam" unique_id=218745619 instance=ExtResource("3_22xx6")]
 position = Vector2(272, 433)
+sprite_frames = SubResource("SpriteFrames_g6gvu")
+stats = SubResource("Resource_hnl2t")
 
 [node name="PlayerTeam" type="Node" parent="World" unique_id=1515012192]
 script = ExtResource("4_12wo5")
@@ -84,15 +814,23 @@ metadata/_custom_type_script = "uid://orquvx13qs7a"
 
 [node name="Warrior" parent="World/PlayerTeam" unique_id=1466237971 instance=ExtResource("10_4mk0t")]
 position = Vector2(924, 155)
+frame_progress = 0.0
+stats = SubResource("Resource_45m1l")
 
 [node name="Warrior2" parent="World/PlayerTeam" unique_id=16416064 instance=ExtResource("10_4mk0t")]
 position = Vector2(925, 245)
+frame_progress = 0.0
+stats = SubResource("Resource_213qv")
 
 [node name="Warrior3" parent="World/PlayerTeam" unique_id=1377281991 instance=ExtResource("10_4mk0t")]
 position = Vector2(926, 336)
+frame_progress = 0.0
+stats = SubResource("Resource_tqgk1")
 
 [node name="Warrior4" parent="World/PlayerTeam" unique_id=750264240 instance=ExtResource("10_4mk0t")]
 position = Vector2(928.00006, 428)
+frame_progress = 0.0
+stats = SubResource("Resource_nqrnt")
 
 [node name="Audio" type="AudioStreamPlayer2D" parent="." unique_id=1484488160]
 stream = ExtResource("15_tf4cl")
@@ -111,6 +849,7 @@ size_flags_vertical = 3
 metadata/_edit_lock_ = true
 
 [node name="Arrow" type="TextureRect" parent="CanvasLayer/UI" unique_id=1749777467]
+visible = false
 texture_filter = 2
 layout_mode = 0
 offset_left = -51.0
@@ -134,12 +873,11 @@ grow_vertical = 0
 script = ExtResource("13_1ywjy")
 player_team = NodePath("../../../World/PlayerTeam")
 
-[node name="Actions" type="ItemList" parent="CanvasLayer/UI/EntityInfoContainer" unique_id=515437691 node_paths=PackedStringArray("arrow")]
+[node name="Actions" type="ItemList" parent="CanvasLayer/UI/EntityInfoContainer" unique_id=515437691]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_gvie1")
 script = ExtResource("14_kwmn2")
-arrow = NodePath("../../Arrow")
 
 [node name="ActionDescription" type="Label" parent="CanvasLayer/UI/EntityInfoContainer" unique_id=322044844]
 layout_mode = 2

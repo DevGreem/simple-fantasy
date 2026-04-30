@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BlockAction" format=3 uid="uid://dmmp3mdiagcw8"]
+
+[ext_resource type="Script" uid="uid://bibb0v6ftielu" path="res://resources/actions/block_action.gd" id="1_b0b2a"]
+
+[resource]
+script = ExtResource("1_b0b2a")
+name = "Block"
+description = "Block all atacks often he's turn"
+metadata/_custom_type_script = "uid://bibb0v6ftielu"

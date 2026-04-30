@@ -10,8 +10,8 @@ func _input(event: InputEvent):
 		
 		var team: Array[EntityData] = []
 		
-		for i in range(4):
-			var resource := load("res://characters/warrior/warrior.tres")
-			team.append(resource.duplicate())
+		var spawns: PlayerSpawn = load("res://entities/characters/playable_spawn.tres")
+		for character in spawns.characters:
+			team.append(character.scene.instantiate().stats)
 		
 		CombatInitializer.start_combat(team)

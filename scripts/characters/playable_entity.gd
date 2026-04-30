@@ -1,3 +1,4 @@
+@tool
 extends CombatEntity
 
 class_name PlayableEntity
@@ -27,13 +28,13 @@ func _ready() -> void:
 
 func _init_actions() -> void:
 	
-	for action in get_actions():
-		action.on_before_make_action.connect(_on_make_action)
+	for action: ActionBase in stats.actions:
+		action.after_execute.connect(_on_make_action)
 
-func _on_make_action(action: ActionBase) -> void:
+func _on_make_action(action: String) -> void:
 	
 	#prints("Detected action: ", action.action_name)
-	if action.action_name == "Block":
+	if action == "Block":
 		_was_blocking = true
 	else:
 		_was_blocking = false

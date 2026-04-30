@@ -42,8 +42,6 @@ var current_round := 1:
 
 func _ready():
 	set_process_input(false)
-	self.left_team.combat = self
-	self.right_team.combat = self
 	audio_manager.play()
 	audio_manager.finished.connect(_exit_battle)
 	_rotate_left_team()
@@ -78,18 +76,29 @@ func _start_player_turn():
 func _start_turn(team: CombatTeam):
 	
 	prints("Started team turn: ", team)
-	if not _verify_win():
+	if not _verify_win() or ended:
 		return
 	
 	team.start_turn()
 
-func end_turn():
+func end_turn(entity: CombatEntity):
 	
 	if ended:
 		return
 	
 	if not _verify_win():
 		return
+	
+	entity.was_played = true
+	
+	if not entity.sprite_frames.get_frame_texture(entity.animation, entity.frame):
+		await entity.animation_finished
+	else:
+		
+		var tree := get_tree()
+		
+		if tree:
+			await get_tree().create_timer(0.3).timeout
 	
 	print("Ended turn")
 	if phase == CombatPhase.PLAYER_TURN:
@@ -131,9 +140,15 @@ func _end() -> void:
 	set_process_input(true)
 
 func _exit_battle() -> void:
+	
+	ended = true
+	
 	get_tree().change_scene_to_file("res://scenes/map.tscn")
 
 func _input(event: InputEvent):
+	
+	if ended:
+		return
 	
 	if event.is_action_pressed("select_action"):
 		_exit_battle()
@@ -145,6 +160,7 @@ func manual_end(team: CombatTeam) -> void:
 	self._end()
 
 func escape() -> void:
+	await get_tree().process_frame
 	_exit_battle()
 
 ## Return [true] if the combat continues

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://maxrfeqt1gsc"]
+
+[ext_resource type="PackedScene" uid="uid://cwbxcmbxt23bx" path="res://entities/enemies/enemy_entity.tscn" id="1_tnxla"]
+[ext_resource type="Resource" uid="uid://cdrna02f8ikb0" path="res://entities/enemies/goblin/info.tres" id="2_j0usu"]
+
+[node name="Goblin" unique_id=1322854397 instance=ExtResource("1_tnxla")]
+stats = ExtResource("2_j0usu")

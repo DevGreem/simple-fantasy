@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://d20tio0jitlp"]
+
+[ext_resource type="PackedScene" uid="uid://bgol0rt5ftggr" path="res://entities/characters/playable_entity.tscn" id="1_gfyj7"]
+[ext_resource type="SpriteFrames" uid="uid://p28ev63cnwwt" path="res://entities/characters/black_mage/combat_sprites.tres" id="2_r1va4"]
+[ext_resource type="Resource" uid="uid://cghegacjpl3uq" path="res://entities/characters/black_mage/info.tres" id="3_44ks4"]
+
+[node name="BlackMage" unique_id=1322854397 instance=ExtResource("1_gfyj7")]
+sprite_frames = ExtResource("2_r1va4")
+animation = &"idle"
+stats = ExtResource("3_44ks4")

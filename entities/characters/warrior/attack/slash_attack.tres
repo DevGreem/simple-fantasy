@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AttackAction" format=3 uid="uid://b8qxj68via0dg"]
+
+[ext_resource type="Script" uid="uid://dhywjuna0wa6s" path="res://resources/actions/attack_action.gd" id="1_j12xx"]
+[ext_resource type="SpriteFrames" uid="uid://ccbfcbc1dr20" path="res://entities/characters/warrior/attack/attack_sprites.tres" id="1_s277d"]
+
+[resource]
+script = ExtResource("1_j12xx")
+name = "Slash Attack"
+description = "Hit an enemy with a slash"
+animation = ExtResource("1_s277d")
+scale = Vector2(0.5, 0.5)
+metadata/_custom_type_script = "uid://dhywjuna0wa6s"

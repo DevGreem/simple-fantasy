@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cej2a1o63yo75"]
+
+[ext_resource type="PackedScene" uid="uid://bgol0rt5ftggr" path="res://entities/characters/playable_entity.tscn" id="1_dgkxn"]
+[ext_resource type="SpriteFrames" uid="uid://cgpkiwntf6aj4" path="res://entities/characters/white_mage/combat_sprites.tres" id="2_025tv"]
+[ext_resource type="Resource" uid="uid://dnelibmf225ln" path="res://entities/characters/white_mage/info.tres" id="3_5n3my"]
+
+[node name="WhiteMage" unique_id=1322854397 instance=ExtResource("1_dgkxn")]
+sprite_frames = ExtResource("2_025tv")
+animation = &"idle"
+stats = ExtResource("3_5n3my")

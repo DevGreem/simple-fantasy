@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="FireballEffect" format=3 uid="uid://cu4um7tbqtgms"]
+
+[ext_resource type="SpriteFrames" uid="uid://w0a30wv1sc74" path="res://resources/spells/fireball/sprites.tres" id="1_htyab"]
+[ext_resource type="Script" uid="uid://cumgc07v0ob4c" path="res://resources/spells/fireball/effect.gd" id="1_wfppe"]
+[ext_resource type="Script" uid="uid://cuv5b0kvf3qqf" path="res://scripts/ranges/int_range.gd" id="2_5e312"]
+[ext_resource type="AudioStream" uid="uid://gvutanaad6m8" path="res://audio/spells/fireball/fire_explosion.wav" id="4_upb4j"]
+
+[sub_resource type="Resource" id="Resource_upb4j"]
+script = ExtResource("2_5e312")
+min_value = 23
+max_value = 45
+metadata/_custom_type_script = "uid://cuv5b0kvf3qqf"
+
+[resource]
+script = ExtResource("1_wfppe")
+power = SubResource("Resource_upb4j")
+animation = ExtResource("1_htyab")
+scale = Vector2(0.5, 0.5)
+sound = ExtResource("4_upb4j")
+metadata/_custom_type_script = "uid://cumgc07v0ob4c"

@@ -20,7 +20,7 @@ func _state_default_start() -> void:
 	actual_state = default_state
 	_state_start()
 
-func _state_start(...args) -> void:
+func _state_start(args: Array = []) -> void:
 	
 	actual_state.controlled_node = controlled_node
 	actual_state.state_machine = self
@@ -28,7 +28,7 @@ func _state_start(...args) -> void:
 	
 	#prints("StateMachine", controlled_node.name, "start state", actual_state.name)
 
-func change_state(node: String, ...args) -> void:
+func change_state(node: String, args: Array = []) -> void:
 	
 	if actual_state and actual_state.has_method("end"):
 		actual_state.end()

@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="EntityData" format=3 uid="uid://0mjk3y34aehm"]
+
+[ext_resource type="Script" uid="uid://crnuayr6f8uty" path="res://resources/actions/action_base.gd" id="1_rtcfb"]
+[ext_resource type="Resource" uid="uid://djvu710eck0ru" path="res://entities/default/habilities/basic_attack.tres" id="2_toloj"]
+[ext_resource type="Resource" uid="uid://c3r06akk367jn" path="res://entities/default/habilities/basic_cast_spell.tres" id="3_ifx7u"]
+[ext_resource type="Resource" uid="uid://dmmp3mdiagcw8" path="res://entities/default/habilities/basic_block.tres" id="3_yj3r6"]
+[ext_resource type="Resource" uid="uid://b6ghdyer8ni5v" path="res://entities/default/habilities/basic_run.tres" id="4_0epr1"]
+[ext_resource type="SpriteFrames" uid="uid://do8wekhxs36ea" path="res://entities/characters/thief/combat_sprites.tres" id="5_5kffo"]
+[ext_resource type="Script" uid="uid://cuv5b0kvf3qqf" path="res://scripts/ranges/int_range.gd" id="6_wkfxq"]
+[ext_resource type="SpriteFrames" uid="uid://c06ehrrw4s77k" path="res://entities/characters/thief/map_sprites.tres" id="7_ov8a4"]
+[ext_resource type="Script" uid="uid://do56o8j56v1q3" path="res://resources/entities/entity_data.gd" id="8_rldvb"]
+[ext_resource type="Script" uid="uid://cexn78qlp65y0" path="res://resources/spells/spell.gd" id="10_6mcks"]
+
+[sub_resource type="Resource" id="Resource_wgifn"]
+script = ExtResource("6_wkfxq")
+min_value = 5
+max_value = 10
+metadata/_custom_type_script = "uid://cuv5b0kvf3qqf"
+
+[sub_resource type="Resource" id="Resource_xju84"]
+script = ExtResource("6_wkfxq")
+min_value = 15
+max_value = 20
+metadata/_custom_type_script = "uid://cuv5b0kvf3qqf"
+
+[resource]
+script = ExtResource("8_rldvb")
+name = "Thief"
+map_sprite = ExtResource("7_ov8a4")
+combat_sprite = ExtResource("5_5kffo")
+actions = Array[ExtResource("1_rtcfb")]([ExtResource("2_toloj"), ExtResource("3_ifx7u"), ExtResource("3_yj3r6"), ExtResource("4_0epr1")])
+max_hp = 100
+hp = 100
+dmg = SubResource("Resource_xju84")
+def = SubResource("Resource_wgifn")
+max_mana = 10
+mana = 10
+metadata/_custom_type_script = "uid://do56o8j56v1q3"

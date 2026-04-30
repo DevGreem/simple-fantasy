@@ -1,0 +1,50 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://ccbfcbc1dr20"]
+
+[ext_resource type="Texture2D" uid="uid://b0q1vsmm7qjky" path="res://assets/actions/attack/slash_attack/VFX 1/Frames/warrior_skill1_frame1.png" id="1_1lpp5"]
+[ext_resource type="Texture2D" uid="uid://dgq8xw033loqe" path="res://assets/actions/attack/slash_attack/VFX 1/Frames/warrior_skill1_frame2.png" id="2_02wsk"]
+[ext_resource type="Texture2D" uid="uid://c2jpob85br7l6" path="res://assets/actions/attack/slash_attack/VFX 1/Frames/warrior_skill1_frame3.png" id="3_7ldxv"]
+[ext_resource type="Texture2D" uid="uid://cbcjfnyosjgn6" path="res://assets/actions/attack/slash_attack/VFX 1/Frames/warrior_skill1_frame4.png" id="4_u5hfq"]
+[ext_resource type="Texture2D" uid="uid://cm5ovu3t3n0vb" path="res://assets/actions/attack/slash_attack/VFX 1/Frames/warrior_skill1_frame5.png" id="5_j34et"]
+[ext_resource type="Texture2D" uid="uid://cr5ymo6lwxlgg" path="res://assets/actions/attack/slash_attack/VFX 1/Frames/warrior_skill1_frame6.png" id="6_7q22x"]
+[ext_resource type="Texture2D" uid="uid://dtxb7dqc2bk17" path="res://assets/actions/attack/slash_attack/VFX 1/Frames/warrior_skill1_frame7.png" id="7_e4kpb"]
+[ext_resource type="Texture2D" uid="uid://bxn4lql2mjgqe" path="res://assets/actions/attack/slash_attack/VFX 1/Frames/warrior_skill1_frame8.png" id="8_lgu3e"]
+[ext_resource type="Texture2D" uid="uid://cf5iecfgsod2r" path="res://assets/actions/attack/slash_attack/VFX 1/Frames/warrior_skill1_frame9.png" id="9_wmt47"]
+[ext_resource type="Texture2D" uid="uid://egcxtkk3eruc" path="res://assets/actions/attack/slash_attack/VFX 1/Frames/warrior_skill1_frame10.png" id="10_v5c8i"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1lpp5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_02wsk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7ldxv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_u5hfq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_j34et")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7q22x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_e4kpb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_lgu3e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_wmt47")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_v5c8i")
+}],
+"loop": false,
+"name": &"default",
+"speed": 25.0
+}]

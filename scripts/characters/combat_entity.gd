@@ -30,7 +30,8 @@ var blocking: bool = false:
 func _ready():
 	self.stats = stats.duplicate(true)
 	self.animation_finished.connect(self._on_animation_finished)
-	self.play("idle")
+	self.animation = "idle"
+	self.play()
 	prints("Loaded entity: \n", self.stats, "\n")
 
 func _init_stats() -> void:
@@ -39,12 +40,9 @@ func _init_stats() -> void:
 		return
 	
 	self.sprite_frames = stats.combat_sprite
-	self.stats.on_die.connect(_die)
-
-func get_actions() -> Array[ActionBase]:
-	var actions_container: ActionsContainer = get_node("ActionsContainer")
 	
-	return actions_container.actions
+	if not self.stats.on_die.is_connected(_die):
+		self.stats.on_die.connect(_die)
 
 func attack(enemy: CombatEntity) -> void:
 	enemy.get_damage(self)
@@ -64,14 +62,37 @@ func get_damage(entity: CombatEntity) -> void:
 	
 	self.stats.hp -= damage
 	
+	_on_damaged(damage)
+	
+	#prints("Received ", damage, " points of damage")
+
+func receive_damage(dmg: int) -> void:
+	self.stats.hp -= dmg
+	_on_damaged(dmg)
+
+func _on_damaged(damage: int):
 	if is_alive():
 		self.play("damaged")
 	
 	var damage_label: DamageLabel = DamageLabel.new()
+	damage_label.scale = Vector2(0.5, 0.5)
 	add_child(damage_label)
 	damage_label.set_dmg(damage)
+
+func heal(target: CombatEntity, healed: int, can_revive: bool = false) -> void:
 	
-	#prints("Received ", damage, " points of damage")
+	if target.is_alive() or can_revive:
+		target.receive_heal(healed)
+
+func receive_heal(healed: int) -> void:
+	self.stats.hp += healed
+	_on_damaged(healed)
+
+func cast_spell(spell: Spell, targets: Array[CombatEntity]):
+	
+	if spell.mana_cost < self.stats.mana:
+		self.stats.mana -= spell.mana_cost
+		spell.apply_effects(self, targets)
 
 func block() -> void:
 	self.blocking = true

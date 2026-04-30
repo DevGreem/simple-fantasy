@@ -3,6 +3,7 @@ extends CombatTeam
 class_name AITeam
 
 @export var order: Array[AIUtils.AITarget] = [AIUtils.AITarget.RANDOM]
+var _picked_ally: AIEntity
 
 func start_turn():
 	_select_entity()
@@ -17,9 +18,9 @@ func _select_entity():
 	
 	if order[0] == AIUtils.AITarget.RANDOM:
 		
-		var picked_ally: AIEntity = available.pick_random()
+		_picked_ally = available.pick_random()
 		
-		await picked_ally.use_turn()
+		await _picked_ally.use_turn()
 	
 	if combat:
-		combat.end_turn()
+		combat.end_turn(_picked_ally)

@@ -26,7 +26,10 @@ enum EntityAIType {
 
 func use_turn() -> void:
 	
-	await get_tree().create_timer(0.30).timeout
+	var tree := get_tree()
+	
+	if tree:
+		await tree.create_timer(0.30).timeout
 	
 	if type == EntityAIType.RANDOM:
 		attack_player()

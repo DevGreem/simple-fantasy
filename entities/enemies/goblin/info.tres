@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="EntityData" format=3 uid="uid://cdrna02f8ikb0"]
+
+[ext_resource type="Script" uid="uid://crnuayr6f8uty" path="res://resources/actions/action_base.gd" id="1_nudlt"]
+[ext_resource type="Script" uid="uid://do56o8j56v1q3" path="res://resources/entities/entity_data.gd" id="2_d48wx"]
+[ext_resource type="SpriteFrames" uid="uid://uajnj70ffpjp" path="res://entities/enemies/goblin/combat_sprite.tres" id="2_r5tu5"]
+[ext_resource type="Script" uid="uid://cuv5b0kvf3qqf" path="res://scripts/ranges/int_range.gd" id="3_b8eqd"]
+[ext_resource type="Script" uid="uid://cexn78qlp65y0" path="res://resources/spells/spell.gd" id="3_r5tu5"]
+
+[sub_resource type="Resource" id="Resource_tvn4f"]
+script = ExtResource("3_b8eqd")
+min_value = 1
+max_value = 8
+metadata/_custom_type_script = "uid://cuv5b0kvf3qqf"
+
+[sub_resource type="Resource" id="Resource_17548"]
+script = ExtResource("3_b8eqd")
+min_value = 12
+max_value = 15
+metadata/_custom_type_script = "uid://cuv5b0kvf3qqf"
+
+[resource]
+script = ExtResource("2_d48wx")
+name = "Goblin"
+combat_sprite = ExtResource("2_r5tu5")
+max_hp = 75
+hp = 75
+dmg = SubResource("Resource_17548")
+def = SubResource("Resource_tvn4f")
+max_mana = 6
+mana = 6
+metadata/_custom_type_script = "uid://do56o8j56v1q3"

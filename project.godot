@@ -17,18 +17,37 @@ config/icon="res://icon.svg"
 
 [audio]
 
-buses/default_bus_layout=""
+buses/default_bus_layout="uid://d0qi7dxydcb1k"
 
 [autoload]
 
 Sprite2DUtils="*uid://brd27eqbnrcrs"
 AIUtils="*uid://3jve0i0egqad"
+DebugUtils="*uid://daevmislindju"
+CombatInitializer="*uid://dk6rml76royf4"
+MathUtils="*uid://66nya7xo6vdl"
 
 [display]
 
 window/size/mode=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[file_customization]
+
+folder_colors={
+"res://assets/": "teal",
+"res://assets/actions/": "gray",
+"res://assets/entities/enemies/": "red",
+"res://assets/spells/": "purple",
+"res://entities/": "green",
+"res://entities/characters/": "yellow",
+"res://entities/enemies/": "red"
+}
+
+[gui]
+
+theme/custom="uid://nd8twg3pnjyn"
 
 [input]
 
@@ -56,6 +75,11 @@ unselect_action={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194325,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
+load_map={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":67,"key_label":0,"unicode":99,"location":0,"echo":false,"script":null)
+]
+}
 
 [physics]
 
@@ -63,4 +87,5 @@ unselect_action={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"

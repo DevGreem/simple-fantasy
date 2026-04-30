@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RunAction" format=3 uid="uid://b6ghdyer8ni5v"]
+
+[ext_resource type="Script" uid="uid://b5ysf7mogk72f" path="res://resources/actions/run_action.gd" id="1_85q63"]
+
+[resource]
+script = ExtResource("1_85q63")
+name = "Run"
+description = "Had a change of escape of the battle"
+metadata/_custom_type_script = "uid://b5ysf7mogk72f"

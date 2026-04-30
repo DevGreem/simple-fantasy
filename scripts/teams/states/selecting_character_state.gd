@@ -11,7 +11,7 @@ var _selected_index: int = 0
 @export var arrow_node: ArrowPointer
 @export var show_stats_node: EntityStatsNode
 
-func start(..._args):
+func start(_args = []):
 	
 	if assigned_team.combat.ended:
 		set_process_input(false)
@@ -21,7 +21,7 @@ func start(..._args):
 	
 	await get_tree().process_frame
 	self._selected_index = wrapi(_selected_index, 0, get_total_availables())
-	assigned_team.select_character()
+	assigned_team.select_character()	
 	show_stats_node.show()
 	arrow_node.select_object(
 		get_hovered(),

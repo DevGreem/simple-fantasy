@@ -34,10 +34,11 @@ func select_character(character: PlayableEntity = null):
 	
 	if selected_character:
 		selected_character.unselect()
-		on_unselect_character.emit()
 		
 		if selected_character.blocking:
 			selected_character.play("blocking")
+		
+		on_unselect_character.emit()
 
 var selected_enemy: AIEntity:
 	set(value):

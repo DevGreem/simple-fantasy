@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CastSpellAction" format=3 uid="uid://c3r06akk367jn"]
+
+[ext_resource type="Script" uid="uid://cobpvgrw4i04p" path="res://resources/actions/cast_spell_action.gd" id="1_bh3kc"]
+
+[resource]
+script = ExtResource("1_bh3kc")
+name = "Spells"
+description = "Cast a spell"
+metadata/_custom_type_script = "uid://cobpvgrw4i04p"

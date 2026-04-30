@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Spell" format=3 uid="uid://b0ckip7b2xo15"]
+
+[ext_resource type="Script" uid="uid://0fjnaka6gj1" path="res://resources/spells/spell_effect.gd" id="1_2y8yr"]
+[ext_resource type="Resource" uid="uid://cbtb2tfbl5s20" path="res://resources/spells/god_healing/effect.tres" id="2_7acv6"]
+[ext_resource type="Script" uid="uid://cexn78qlp65y0" path="res://resources/spells/spell.gd" id="2_1837j"]
+
+[resource]
+script = ExtResource("2_1837j")
+name = "God Healing"
+description = "Heal a ally with god power"
+mana_cost = 12
+target = 6
+effect = Array[ExtResource("1_2y8yr")]([ExtResource("2_7acv6")])
+metadata/_custom_type_script = "uid://cexn78qlp65y0"

@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="EntityData" format=3 uid="uid://cpwgmmouvyn8h"]
+
+[ext_resource type="Script" uid="uid://crnuayr6f8uty" path="res://resources/actions/action_base.gd" id="1_jsux6"]
+[ext_resource type="Resource" uid="uid://b8qxj68via0dg" path="res://entities/characters/warrior/attack/slash_attack.tres" id="2_tplrf"]
+[ext_resource type="Resource" uid="uid://c3r06akk367jn" path="res://entities/default/habilities/basic_cast_spell.tres" id="3_fm8ox"]
+[ext_resource type="Resource" uid="uid://dmmp3mdiagcw8" path="res://entities/default/habilities/basic_block.tres" id="3_tplrf"]
+[ext_resource type="Resource" uid="uid://b6ghdyer8ni5v" path="res://entities/default/habilities/basic_run.tres" id="4_fm8ox"]
+[ext_resource type="SpriteFrames" uid="uid://d0pqrx7a6mkwl" path="res://entities/characters/warrior/combat_sprites.tres" id="5_hbu5l"]
+[ext_resource type="Script" uid="uid://cuv5b0kvf3qqf" path="res://scripts/ranges/int_range.gd" id="6_ot5m5"]
+[ext_resource type="SpriteFrames" uid="uid://xr7q0kisgg8h" path="res://entities/characters/warrior/map_sprites.tres" id="7_q0001"]
+[ext_resource type="Script" uid="uid://do56o8j56v1q3" path="res://resources/entities/entity_data.gd" id="8_ygwha"]
+[ext_resource type="Script" uid="uid://cexn78qlp65y0" path="res://resources/spells/spell.gd" id="10_fm8ox"]
+
+[sub_resource type="Resource" id="Resource_wgifn"]
+script = ExtResource("6_ot5m5")
+min_value = 5
+max_value = 10
+metadata/_custom_type_script = "uid://cuv5b0kvf3qqf"
+
+[sub_resource type="Resource" id="Resource_xju84"]
+script = ExtResource("6_ot5m5")
+min_value = 20
+max_value = 30
+metadata/_custom_type_script = "uid://cuv5b0kvf3qqf"
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("8_ygwha")
+name = "Warrior"
+map_sprite = ExtResource("7_q0001")
+combat_sprite = ExtResource("5_hbu5l")
+actions = Array[ExtResource("1_jsux6")]([ExtResource("2_tplrf"), ExtResource("3_fm8ox"), ExtResource("3_tplrf"), ExtResource("4_fm8ox")])
+max_hp = 150
+hp = 150
+dmg = SubResource("Resource_xju84")
+def = SubResource("Resource_wgifn")
+max_mana = 5
+mana = 5
+metadata/_custom_type_script = "uid://do56o8j56v1q3"

@@ -1,0 +1,38 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://w0a30wv1sc74"]
+
+[ext_resource type="Texture2D" uid="uid://brauxdt41brdq" path="res://assets/spells/fireball/VFX1/frames/FireMage_skill1_frame1.png" id="1_dkwov"]
+[ext_resource type="Texture2D" uid="uid://bafeecudcugft" path="res://assets/spells/fireball/VFX1/frames/FireMage_skill1_frame2.png" id="2_p55l6"]
+[ext_resource type="Texture2D" uid="uid://dc0w1ayxqrhns" path="res://assets/spells/fireball/VFX1/frames/FireMage_skill1_frame3.png" id="3_c4p2o"]
+[ext_resource type="Texture2D" uid="uid://dhk28715capmi" path="res://assets/spells/fireball/VFX1/frames/FireMage_skill1_frame4.png" id="4_ku2uk"]
+[ext_resource type="Texture2D" uid="uid://dk2wn782age15" path="res://assets/spells/fireball/VFX1/frames/FireMage_skill1_frame5.png" id="5_lp8cl"]
+[ext_resource type="Texture2D" uid="uid://cru7lnrwxj6oo" path="res://assets/spells/fireball/VFX1/frames/FireMage_skill1_frame6.png" id="6_cbfsc"]
+[ext_resource type="Texture2D" uid="uid://bjc3w0rvrn4q4" path="res://assets/spells/fireball/VFX1/frames/FireMage_skill1_frame7.png" id="7_0xrsg"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_dkwov")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_p55l6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_c4p2o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ku2uk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_lp8cl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_cbfsc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_0xrsg")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]

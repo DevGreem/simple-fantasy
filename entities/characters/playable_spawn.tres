@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="PlayerSpawn" format=3 uid="uid://diwe8u50ouq2t"]
+
+[ext_resource type="Script" uid="uid://co56ssjwetoea" path="res://resources/entities/entity_spawn_data.gd" id="1_3ubwf"]
+[ext_resource type="Script" uid="uid://lmultliheb37" path="res://resources/entities/player_spawn.gd" id="1_wpnyv"]
+[ext_resource type="PackedScene" uid="uid://cr2qe2281f5vx" path="res://entities/characters/warrior/warrior.tscn" id="2_ncjjr"]
+[ext_resource type="PackedScene" uid="uid://cugrow1ppc3t4" path="res://entities/characters/thief/thief.tscn" id="3_ufrqf"]
+[ext_resource type="PackedScene" uid="uid://d20tio0jitlp" path="res://entities/characters/black_mage/black_mage.tscn" id="4_a086n"]
+[ext_resource type="PackedScene" uid="uid://cej2a1o63yo75" path="res://entities/characters/white_mage/white_mage.tscn" id="5_xckg2"]
+
+[sub_resource type="Resource" id="Resource_4irjv"]
+script = ExtResource("1_3ubwf")
+scene = ExtResource("2_ncjjr")
+metadata/_custom_type_script = "uid://co56ssjwetoea"
+
+[sub_resource type="Resource" id="Resource_5kwlk"]
+script = ExtResource("1_3ubwf")
+scene = ExtResource("3_ufrqf")
+metadata/_custom_type_script = "uid://co56ssjwetoea"
+
+[sub_resource type="Resource" id="Resource_f57e3"]
+script = ExtResource("1_3ubwf")
+scene = ExtResource("4_a086n")
+metadata/_custom_type_script = "uid://co56ssjwetoea"
+
+[sub_resource type="Resource" id="Resource_xfwf4"]
+script = ExtResource("1_3ubwf")
+scene = ExtResource("5_xckg2")
+metadata/_custom_type_script = "uid://co56ssjwetoea"
+
+[resource]
+script = ExtResource("1_wpnyv")
+characters = Array[ExtResource("1_3ubwf")]([SubResource("Resource_4irjv"), SubResource("Resource_5kwlk"), SubResource("Resource_f57e3"), SubResource("Resource_xfwf4")])
+metadata/_custom_type_script = "uid://lmultliheb37"

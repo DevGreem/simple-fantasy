@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cwbxcmbxt23bx"]
+
+[ext_resource type="PackedScene" uid="uid://bboed8ypyawwh" path="res://entities/entity.tscn" id="1_lcw65"]
+[ext_resource type="Script" uid="uid://dktvnnablg8rj" path="res://scripts/characters/ai_entity.gd" id="2_couwg"]
+
+[node name="EnemyEntity" unique_id=1322854397 instance=ExtResource("1_lcw65")]
+script = ExtResource("2_couwg")
+priority = 0
+type = 0
+target = Array[int]([0])

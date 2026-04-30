@@ -1,0 +1,54 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://do2776ir1jokv"]
+
+[ext_resource type="Texture2D" uid="uid://2cil0n41xfnc" path="res://assets/spells/god_healing/VFX 2/frames/Priest_skill2_frame1.png" id="1_6icgr"]
+[ext_resource type="Texture2D" uid="uid://c0wql40lpxh57" path="res://assets/spells/god_healing/VFX 2/frames/Priest_skill2_frame2.png" id="2_k3a6y"]
+[ext_resource type="Texture2D" uid="uid://2gby8gm8pjxc" path="res://assets/spells/god_healing/VFX 2/frames/Priest_skill2_frame3.png" id="3_lhgjq"]
+[ext_resource type="Texture2D" uid="uid://d3fxjvhn58ccm" path="res://assets/spells/god_healing/VFX 2/frames/Priest_skill2_frame4.png" id="4_e1kp3"]
+[ext_resource type="Texture2D" uid="uid://b2fbewwof3qib" path="res://assets/spells/god_healing/VFX 2/frames/Priest_skill2_frame5.png" id="5_3kavl"]
+[ext_resource type="Texture2D" uid="uid://cyh87cepwkttl" path="res://assets/spells/god_healing/VFX 2/frames/Priest_skill2_frame6.png" id="6_456fk"]
+[ext_resource type="Texture2D" uid="uid://c3hai7pfwmbg8" path="res://assets/spells/god_healing/VFX 2/frames/Priest_skill2_frame7.png" id="7_wxe6a"]
+[ext_resource type="Texture2D" uid="uid://c0ixvtst1vg6g" path="res://assets/spells/god_healing/VFX 2/frames/Priest_skill2_frame8.png" id="8_p7ugo"]
+[ext_resource type="Texture2D" uid="uid://mh2ylye5u3cu" path="res://assets/spells/god_healing/VFX 2/frames/Priest_skill2_frame9.png" id="9_t0wuj"]
+[ext_resource type="Texture2D" uid="uid://cgq6pbmepvh2o" path="res://assets/spells/god_healing/VFX 2/frames/Priest_skill2_frame10.png" id="10_4a5on"]
+[ext_resource type="Texture2D" uid="uid://d0kqj78qo616a" path="res://assets/spells/god_healing/VFX 2/frames/Priest_skill2_frame11.png" id="11_jn5px"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6icgr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_k3a6y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_lhgjq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_e1kp3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_3kavl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_456fk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wxe6a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_p7ugo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_t0wuj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_4a5on")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_jn5px")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
