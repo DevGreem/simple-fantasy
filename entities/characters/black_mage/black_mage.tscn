@@ -7,4 +7,5 @@
 [node name="BlackMage" unique_id=1322854397 instance=ExtResource("1_gfyj7")]
 sprite_frames = ExtResource("2_r1va4")
 animation = &"idle"
+frame_progress = 0.51739335
 stats = ExtResource("3_44ks4")

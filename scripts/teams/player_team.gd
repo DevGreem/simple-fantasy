@@ -68,3 +68,22 @@ func start_turn():
 		_reset_played_characters()
 	
 	state_machine.change_state("SelectingCharacter")
+
+func get_unselected_allies() -> Array[PlayableEntity]:
+	return _get_unselected(allies)
+
+func get_unselected_alive_allies() -> Array[PlayableEntity]:
+	return _get_unselected(get_alive_allies())
+
+func _get_unselected(arr: Array[CombatEntity]) -> Array[PlayableEntity]:
+	
+	var unselected: Array[PlayableEntity] = []
+	
+	for ally in arr:
+		
+		if ally == selected_character:
+			continue
+		
+		unselected.append(ally)
+	
+	return unselected

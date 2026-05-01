@@ -104,8 +104,16 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_f2vfh")
 }],
-"loop": false,
-"name": &"magic",
+"loop": true,
+"name": &"spelled",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y2n37")
+}],
+"loop": true,
+"name": &"spelling",
 "speed": 5.0
 }, {
 "frames": [{

@@ -74,23 +74,29 @@ func _on_damaged(damage: int):
 	if is_alive():
 		self.play("damaged")
 	
+	_show_received_label(damage)
+
+func heal(target: CombatEntity, healed: int, can_revive := false) -> void:
+	target.receive_heal(healed, can_revive)
+
+func receive_heal(healed: int, can_revive := false) -> void:
+	set_heal(healed, can_revive)
+
+func set_heal(healed: int, can_revive := false) -> void:
+	
+	if is_alive() or can_revive:
+		self.stats.hp += healed
+		_show_received_label(healed)
+
+func _show_received_label(received: int) -> void:
 	var damage_label: DamageLabel = DamageLabel.new()
 	damage_label.scale = Vector2(0.5, 0.5)
 	add_child(damage_label)
-	damage_label.set_dmg(damage)
-
-func heal(target: CombatEntity, healed: int, can_revive: bool = false) -> void:
-	
-	if target.is_alive() or can_revive:
-		target.receive_heal(healed)
-
-func receive_heal(healed: int) -> void:
-	self.stats.hp += healed
-	_on_damaged(healed)
+	damage_label.set_dmg(received)
 
 func cast_spell(spell: Spell, targets: Array[CombatEntity]):
 	
-	if spell.mana_cost < self.stats.mana:
+	if spell.mana_cost <= self.stats.mana:
 		self.stats.mana -= spell.mana_cost
 		spell.apply_effects(self, targets)
 

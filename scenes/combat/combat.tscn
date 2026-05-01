@@ -11,8 +11,8 @@
 [ext_resource type="Script" uid="uid://bt8tkddpd4473" path="res://scripts/teams/states/idle_state.gd" id="7_0qyji"]
 [ext_resource type="Script" uid="uid://cnr4paxy4u7gt" path="res://scripts/teams/ai_team.gd" id="7_xkyey"]
 [ext_resource type="Script" uid="uid://rbsj2crbk33k" path="res://scripts/teams/states/spelling_state.gd" id="9_05d77"]
-[ext_resource type="Script" uid="uid://4q7fsi1cm5nl" path="res://scripts/teams/states/targeting_spell_state.gd" id="10_akrri"]
 [ext_resource type="Script" uid="uid://n27he60pn0x1" path="res://assets/arrows/arrow_pointer.gd" id="11_hrcy2"]
+[ext_resource type="Script" uid="uid://c4517y38v43uh" path="res://scripts/teams/states/pointable_targeting_spell_state.gd" id="11_j11kn"]
 [ext_resource type="Script" uid="uid://cagtdlroto1qw" path="res://scripts/characters/entity_spells_container.gd" id="13_j3cqa"]
 [ext_resource type="Script" uid="uid://c27k5d341tcis" path="res://scripts/characters/entity_stats.gd" id="13_si0bq"]
 [ext_resource type="Texture2D" uid="uid://chgglggmv7e15" path="res://assets/backgrounds/forest/forest.png" id="14_h2sm1"]
@@ -76,11 +76,11 @@ script = ExtResource("9_05d77")
 spells_container = NodePath("../../../../CanvasLayer/UI/EntitySpellsContainer")
 metadata/_custom_type_script = "uid://rbsj2crbk33k"
 
-[node name="TargetingSpell" type="Node" parent="World/PlayerTeam/StateMachine" unique_id=1223958452 node_paths=PackedStringArray("arrow_node", "spells_container")]
-script = ExtResource("10_akrri")
+[node name="PointableTargetingSpell" type="Node" parent="World/PlayerTeam/StateMachine" unique_id=1519760328 node_paths=PackedStringArray("arrow_node", "entity_stats")]
+script = ExtResource("11_j11kn")
 arrow_node = NodePath("../../../../CanvasLayer/UI/Arrow")
-spells_container = NodePath("../../../../CanvasLayer/UI/EntitySpellsContainer")
-metadata/_custom_type_script = "uid://4q7fsi1cm5nl"
+entity_stats = NodePath("../../../../CanvasLayer/EntityStats")
+metadata/_custom_type_script = "uid://c4517y38v43uh"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1952281398]
 

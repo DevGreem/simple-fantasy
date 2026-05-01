@@ -33,6 +33,8 @@ signal on_revive
 			value = 0
 			on_die.emit()
 			#print_rich('**Character ', self, ' Died**')
+		elif value > max_hp:
+			value = max_hp
 			
 		hp = value
 			

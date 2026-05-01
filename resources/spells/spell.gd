@@ -4,47 +4,39 @@ class_name Spell
 
 ## Define who's can spell target
 enum Target {
+	RANDOM = 0,
 	# Self team
 	## Target self
-	SELF = 1,
+	SELF = 16,
 	## Target an ally
-	ALLY = 6,
+	ALLY = 17,
 	## Target an ally or self
-	ALLY_OR_SELF = 2,
-	## Target an ally and self,
-	ALLY_AND_SELF = 3,
+	ALLY_OR_SELF = 18,
 	## Target all team allies
-	ALLIES = 2,
-	## Target all team allies and self
-	ALLIES_SELF = 5,
+	ALLIES = 32,
+	## Target a random ally
+	RANDOM_ALLY = 21,
 	## Target all enemies and an ally
-	ENEMIES_ALLY = 4,
+	ENEMIES_ALLY = 64,
 	# Enemies team
 	## Target an enemy
-	ENEMY = 7,
-	## Target an enemy and self
-	ENEMY_AND_SELF = 10,
+	ENEMY = 65,
 	## Target all allies and a enemy
-	ALLIES_ENEMY = 9,
+	ALLIES_ENEMY = 67,
 	## Target all team enemies
-	ENEMIES = 8,
-	## Target all team enemies and self
-	ENEMIES_SELF = 11,
+	ENEMIES = 128,
+	## Target a random enemy
+	RANDOM_ENEMY = 69,
 	# Both teams
-	## Target an enemy or self
-	ENEMY_OR_SELF = 12,
 	## Target one enemy or ally
-	BOTH = 13,
-	## Target an enemy or ally or self
-	BOTH_OR_SELF = 14,
-	## Target an enemy or ally and self
-	BOTH_AND_SELF = 15,
+	BOTH = 130,
 	## Target all teams members
-	TEAMS = 16
+	TEAMS = 256
 }
 
 ## Defined who's can be selectable by the spell
 enum Selectable {
+	NONE,
 	## Can only select he's proper team
 	SELF_TEAM,
 	## Can only select enemies team
@@ -59,9 +51,14 @@ signal finished
 @export var description := ""
 @export var mana_cost := 0
 @export var target := Target.ENEMY 
+@export var accept_died := false
+@export var self_apply := false
 @export var effect: Array[SpellEffect] = []
 
 func apply_effects(caster: CombatEntity = null, targets: Array[CombatEntity] = []) -> void:
+	
+	if self_apply:
+		targets.append(caster)
 	
 	for targeted in targets:
 		for eff in effect:
@@ -69,10 +66,22 @@ func apply_effects(caster: CombatEntity = null, targets: Array[CombatEntity] = [
 	
 	finished.emit()
 
+func is_selectable() -> bool:
+	
+	return target not in [
+		Target.SELF,
+		Target.ALLIES,
+		Target.ENEMIES,
+		Target.TEAMS,
+		Target.RANDOM,
+		Target.RANDOM_ALLY,
+		Target.RANDOM_ENEMY
+	]
+
 func can_select() -> Selectable:
-	if target <= 6:
+	if target <= 64:
 		return Selectable.SELF_TEAM
-	elif target <= 11:
+	elif target <= 128:
 		return Selectable.ENEMIES
 	else:
 		return Selectable.BOTH
@@ -80,6 +89,6 @@ func can_select() -> Selectable:
 ## Returns if the spell can be pointed to a entity
 func can_point() -> bool:
 	# Can point: SELF, ALLIES, ALLIES_SELF, ENEMIES, ENEMIES_SELF, TEAMS
-	# All of this values (except ENEMIES_SELF) have the next condition:
+	# All of this values have the next condition:
 	# He's id is a power of two
-	return not (MathUtils.is_power_of_two(target) or target == Target.ENEMIES_SELF)
+	return not MathUtils.is_power_of_two(target)

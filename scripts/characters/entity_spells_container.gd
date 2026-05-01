@@ -2,7 +2,7 @@ extends HBoxContainer
 
 class_name EntitySpellsContainerNode
 
-var _can_input := false
+var can_input := false
 
 var character: PlayableEntity
 
@@ -39,18 +39,18 @@ func update_data(entity: PlayableEntity) -> void:
 	self.index = 0
 	
 	await get_tree().process_frame
-	_can_input = true
+	can_input = true
 
 func unshow_data() -> void:
-	_can_input = false
+	can_input = false
 	self.hide()
 
 func _input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("unselect_action"):
-		unselect()
+		unshow_data()
 	
-	if not character or not _can_input:
+	if not character or not can_input:
 		return
 	
 	if event.is_action_pressed("up"):
@@ -60,10 +60,4 @@ func _input(event: InputEvent) -> void:
 		self.index += 1
 	
 	if event.is_action_pressed("select_action"):
-		select()
-
-func select() -> void:
-	_can_input = false
-
-func unselect() -> void:
-	_can_input = true
+		can_input = true

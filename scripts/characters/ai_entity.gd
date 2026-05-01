@@ -1,3 +1,4 @@
+@tool
 extends CombatEntity
 
 class_name AIEntity
